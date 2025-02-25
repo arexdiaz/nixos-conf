@@ -1,0 +1,137 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740432748,
+        "narHash": "sha256-BCeFtoJ/+LrZc03viRJWHfzAqqG8gPu/ikZeurv05xs=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "c12dcc9b61429b2ad437a7d4974399ad8f910319",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1740387674,
+        "narHash": "sha256-pGk/aA0EBvI6o4DeuZsr05Ig/r4uMlSaf5EWUZEWM10=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "d58f642ddb23320965b27beb0beba7236e9117b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1740367490,
+        "narHash": "sha256-WGaHVAjcrv+Cun7zPlI41SerRtfknGQap281+AakSAw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "0196c0175e9191c474c26ab5548db27ef5d34b05",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "notion-app-electron": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "notionAur": "notionAur"
+      },
+      "locked": {
+        "lastModified": 1740424819,
+        "narHash": "sha256-T78hVGO3/wzgEAT2Xsul+40P1CWJ8PUHmHi6x/CihPg=",
+        "owner": "arexdiaz",
+        "repo": "notion-app-electron",
+        "rev": "814b701719b77d0b0ca00185e632c363c9a97ae0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arexdiaz",
+        "repo": "notion-app-electron",
+        "type": "github"
+      }
+    },
+    "notionAur": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736870936,
+        "narHash": "sha256-EfTdPr6IEcDU/dQkgjk7jT+fy3IH0lrcKb/wXitF01Q=",
+        "owner": "mateushonorato",
+        "repo": "notion-app-electron-aur",
+        "rev": "8e24cc590cec0338a88040b24e1c184aa3cefc15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mateushonorato",
+        "repo": "notion-app-electron-aur",
+        "rev": "8e24cc590cec0338a88040b24e1c184aa3cefc15",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "notion-app-electron": "notion-app-electron"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
