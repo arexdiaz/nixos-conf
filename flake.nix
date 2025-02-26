@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -26,6 +27,7 @@
           ./configuration.nix
           inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
           inputs.home-manager.nixosModules.default
+          inputs.chaotic.nixosModules.default
         ];
       };
     };
