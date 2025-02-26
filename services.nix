@@ -51,7 +51,7 @@
     # Enable the OpenSSH daemon.
     # openssh.enable = true;
   };
-  
+
   # Required for pipewire
   security.rtkit.enable = true;
 }

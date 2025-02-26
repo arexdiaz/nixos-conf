@@ -12,29 +12,41 @@
       inputs.home-manager.nixosModules.default
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
     ];
-  
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Enable the Nix flake support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  # Bootloader configuration
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true; };
+    kernelPackages = pkgs.linuxPackages_cachyos;
 
-  networking.hostName = "lvnpc"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Load OverlayFS kernel module (required for OverlayFS)
+    kernelModules = [ "overlay" ];
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking = {
+    hostName = "lvnpc"; # Define your hostname.
+    # Enable networking
+    networkmanager.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # firewall.enable = false;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Puerto_Rico";
@@ -53,9 +65,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  
-  # Enable beta nvidia drivers
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rx = {
@@ -90,16 +99,24 @@
     firefox.enable = true;
     steam.enable = true;
     fish.enable = true;
-  };
 
-  programs.bash = {
-    interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
+    bash = {
+      interactiveShellInit = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+    };
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # mtr.enable = true;
+    # gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
   };
 
   # List packages installed in system profile. To search, run:
@@ -112,26 +129,14 @@
     inputs.notion-app-electron.packages.${pkgs.system}.default
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  hardware = {
+    # Enable beta nvidia drivers
+    nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
-  # Load OverlayFS kernel module (required for OverlayFS)
-  boot.kernelModules = [ "overlay" ];
-
-  # Enable Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Enable Bluetooth
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
