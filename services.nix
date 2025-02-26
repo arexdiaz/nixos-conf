@@ -9,7 +9,7 @@
     # Scx scheduler config
     scx = {
       package = pkgs.scx_git.full;
-      scheduler = "scx_lavd";
+      scheduler = "scx_bpfland";
       enable = true;
     };
 
