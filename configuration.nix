@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./services.nix
       inputs.home-manager.nixosModules.default
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
     ];
@@ -76,11 +77,6 @@
       ];
     }
   ];
-
-  services = {
-    extraSpecialArgs = { inherit inputs; };
-    nixFile = import ./services.nix;
-  }
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
