@@ -39,6 +39,7 @@
       #   echo "Hello, ${config.home.username}!"
       # '')
 
+      pkgs.alacritty
       pkgs.eza
       pkgs.fzf
       pkgs.kdePackages.yakuake
