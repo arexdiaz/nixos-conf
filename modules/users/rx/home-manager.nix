@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
 
 {
-    # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  programs.git = {
+    enable = true;
+    userName = "arexito";
+    userEmail = "arexito@icloud.com";
+  };
 
   home = {
     # Home Manager needs a bit of information about you and the paths it should
@@ -73,11 +76,6 @@
     sessionVariables = {
       # EDITOR = "emacs";
     };
-  };
-  
-  programs.git = {
-    userName = "arexito";
-    userEmail = "arexito@icloud.com";
   };
 
   # Let Home Manager install and manage itself.

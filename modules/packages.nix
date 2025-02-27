@@ -24,7 +24,6 @@
     firefox.enable = true;
     steam.enable = true;
     fish.enable = true;
-    git.enable = true;
 
     htop = {
       enable = true;
