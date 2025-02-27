@@ -1,10 +1,9 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
+  imports = [
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
-    ];
+  ];
 
   networking.hostName = "lvnpc";
 }

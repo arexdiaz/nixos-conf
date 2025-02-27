@@ -48,12 +48,7 @@
       # # symlink to the Nix store copy.
       # ".screenrc".source = dotfiles/screenrc;
 
-      # # You can also set the file content immediately.
-      # ".gradle/gradle.properties".text = ''
-      #   org.gradle.console=verbose
-      #   org.gradle.daemon.idletimeout=3600000
-      # '';
-
+      # # Setting psd.conf content immediately.
       ".config/psd/psd.conf".text = ''
         USE_OVERLAYFS="yes"
       '';
@@ -79,13 +74,12 @@
       # EDITOR = "emacs";
     };
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
   
   programs.git = {
-    enable = true;
     userName = "arexito";
     userEmail = "arexito@icloud.com";
   };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }

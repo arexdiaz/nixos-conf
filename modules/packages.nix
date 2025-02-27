@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # List packages installed in system profile. To search, run:
@@ -24,10 +24,11 @@
     firefox.enable = true;
     steam.enable = true;
     fish.enable = true;
+    git.enable = true;
 
     htop = {
       enable = true;
-      package = htop;
+      package = pkgs.htop;
       settings = {
         show_cpu_temperature = true;
         show_cpu_frequency = true;
