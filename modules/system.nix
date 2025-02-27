@@ -1,0 +1,43 @@
+{ config, pkgs, ... }:
+
+{
+  # Set your time zone.
+  time.timeZone = "America/Puerto_Rico";
+
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+        LC_ADDRESS = "en_US.UTF-8";
+        LC_IDENTIFICATION = "en_US.UTF-8";
+        LC_MEASUREMENT = "en_US.UTF-8";
+        LC_MONETARY = "en_US.UTF-8";
+        LC_NAME = "en_US.UTF-8";
+        LC_NUMERIC = "en_US.UTF-8";
+        LC_PAPER = "en_US.UTF-8";
+        LC_TELEPHONE = "en_US.UTF-8";
+        LC_TIME = "en_US.UTF-8";
+      };
+  };
+
+  # Bootloader configuration
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true; };
+    kernelPackages = pkgs.linuxPackages_cachyos;
+
+    # Load OverlayFS kernel module (required for OverlayFS)
+    kernelModules = [ "overlay" ];
+  };
+
+  hardware = {
+    # Enable beta nvidia drivers
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
+
+    # Enable Bluetooth
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+}

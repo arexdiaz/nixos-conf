@@ -8,9 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./services.nix
+      ./modules/networking.nix
+      ./modules/packages.nix
+      ./modules/services.nix
+      ./modules/system.nix
+      ./modules/users/rx
       inputs.home-manager.nixosModules.default
-      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
     ];
 
   # Allow unfree packages
@@ -18,127 +21,6 @@
 
   # Enable the Nix flake support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # Bootloader configuration
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true; };
-    kernelPackages = pkgs.linuxPackages_cachyos;
-
-    # Load OverlayFS kernel module (required for OverlayFS)
-    kernelModules = [ "overlay" ];
-  };
-
-  networking = {
-    hostName = "lvnpc"; # Define your hostname.
-    # Enable networking
-    networkmanager.enable = true;
-
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Open ports in the firewall.
-    # firewall.allowedTCPPorts = [ ... ];
-    # firewall.allowedUDPPorts = [ ... ];
-    # Or disable the firewall altogether.
-    # firewall.enable = false;
-  };
-
-  # Set your time zone.
-  time.timeZone = "America/Puerto_Rico";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.rx = {
-    isNormalUser = true;
-    description = "arexito";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
-  # Run commands as root w/o password.
-  security.sudo.extraRules = [
-    {
-      users = [ "rx" ];
-      commands = [
-        {
-          # Use the absolute path to psd-overlay-helper
-          command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "rx" = import ./home-manager/rx.nix;
-    };
-  };
-
-  # Nixos options
-  programs = {
-    firefox.enable = true;
-    steam.enable = true;
-    fish.enable = true;
-
-    bash = {
-      interactiveShellInit = ''
-        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-        then
-          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-        fi
-      '';
-    };
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # mtr.enable = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    nix-init
-    vim
-    wget
-    profile-sync-daemon
-    inputs.notion-app-electron.packages.${pkgs.system}.default
-  ];
-
-  hardware = {
-    # Enable beta nvidia drivers
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
-    };
-
-    # Enable Bluetooth
-    bluetooth.enable = true;
-    bluetooth.powerOnBoot = true;
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

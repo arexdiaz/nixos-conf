@@ -38,15 +38,6 @@
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
-
-      pkgs.alacritty
-      pkgs.eza
-      pkgs.fzf
-      pkgs.kdePackages.yakuake
-      pkgs.moonlight-qt
-      pkgs.spotify
-      pkgs.tlrc
-      pkgs.vscode
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
