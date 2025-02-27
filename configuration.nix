@@ -131,7 +131,9 @@
 
   hardware = {
     # Enable beta nvidia drivers
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
 
     # Enable Bluetooth
     bluetooth.enable = true;
