@@ -3,7 +3,7 @@
 {
   programs.git = {
     enable = true;
-    userName = "arexito";
+    userName = "arexdiaz";
     userEmail = "arexito@icloud.com";
   };
 
