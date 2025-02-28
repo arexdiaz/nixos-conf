@@ -10,6 +10,7 @@
     kdePackages.yakuake
     moonlight-qt
     nix-init
+    onlyoffice-desktopeditors
     profile-sync-daemon
     python3
     spotify
