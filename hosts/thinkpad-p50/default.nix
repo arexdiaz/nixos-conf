@@ -4,7 +4,8 @@
   imports = [
       ./hardware-configuration.nix
       ../../modules/networking.nix
-      ../../modules/packages.nix
+      ../../modules/default-pkgs.nix
+      ../../modules/packages/tools-pkgs.nix
       ../../modules/services.nix
       ../../modules/system.nix
       ../../modules/users/rx
