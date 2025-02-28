@@ -11,6 +11,7 @@
     moonlight-qt
     nix-init
     profile-sync-daemon
+    python3
     spotify
     tlrc
     vim
