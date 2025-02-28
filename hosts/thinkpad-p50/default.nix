@@ -11,8 +11,11 @@
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
   ];
 
+  networking.hostName = "lvnpc";
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "lvnpc";
+  # Enable beta nvidia drivers
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 }
