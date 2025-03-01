@@ -5,12 +5,12 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
+    kdePackages.kdeconnect-kde
+    kdePackages.krdc
+    kdePackages.yakuake
+    onlyoffice-desktopeditors
     vscode
     inputs.notion-app-electron.packages.${pkgs.system}.default
-    onlyoffice-desktopeditors
-    kdePackages.yakuake
-    kdePackages.krdc
-    kdePackages.kdeconnect-kde
   ];
 
   programs = {
