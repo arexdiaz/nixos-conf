@@ -1,14 +1,15 @@
 { config, pkgs, inputs, ... }:
 
 {
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-        bolt-launcher
-        runelite
-    ];
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    bolt-launcher
+    moonlight-qt
+    runelite
+  ];
 
-    programs = {
-      steam.enable = true;
-    };
+  programs = {
+    steam.enable = true;
+  };
 }
