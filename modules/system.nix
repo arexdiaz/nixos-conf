@@ -24,7 +24,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true; };
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_cachyos; # https://github.com/CachyOS/linux-cachyos
 
     # Load OverlayFS kernel module (required for OverlayFS)
     kernelModules = [ "overlay" ];
