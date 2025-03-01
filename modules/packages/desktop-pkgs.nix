@@ -5,26 +5,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
-    eza
-    fzf
-    kdePackages.yakuake
-    moonlight-qt
-    nix-init
-    onlyoffice-desktopeditors
-    profile-sync-daemon
-    python3
-    spotify
-    tlrc
-    vim
-    wget
     vscode
     inputs.notion-app-electron.packages.${pkgs.system}.default
+    onlyoffice-desktopeditors
+    kdePackages.yakuake
+    kdePackages.krdc
   ];
 
-  # Nixos options
   programs = {
     firefox.enable = true;
-    steam.enable = true;
     fish.enable = true;
 
     htop = {
@@ -35,7 +24,7 @@
         show_cpu_frequency = true;
       };
     };
-
+    
     bash = {
       interactiveShellInit = ''
         if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
@@ -45,13 +34,5 @@
         fi
       '';
     };
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # mtr.enable = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
   };
 }

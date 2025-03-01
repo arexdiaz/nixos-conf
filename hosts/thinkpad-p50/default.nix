@@ -3,9 +3,12 @@
 {
   imports = [
       ./hardware-configuration.nix
-      ../../modules/networking.nix
-      ../../modules/packages/default-pkgs.nix
+      ../../modules/packages/core-pkgs.nix
+      ../../modules/packages/desktop-pkgs.nix
+      ../../modules/packages/entertainment-pkgs.nix
+      ../../modules/packages/hideo-pkgs.nix
       ../../modules/packages/tools-pkgs.nix
+      ../../modules/networking.nix
       ../../modules/services.nix
       ../../modules/system.nix
       ../../modules/users/rx
