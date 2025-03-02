@@ -16,7 +16,7 @@
 
   # Nixos options
   programs = {
-    programs.nh = {
+    nh = {
       enable = true;
       clean.enable = true;
     };
