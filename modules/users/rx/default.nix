@@ -63,6 +63,8 @@
             set state (test $owner != $USER; and echo 'unlocked'; or echo 'locked')
             echo \"nxc-toggle: $state /etc/nixos\"
         end
+        
+        ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       ";
     };
   };
