@@ -29,6 +29,15 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    fishPlugins.done
+    fishPlugins.fzf
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fishPlugins.grc
+    grc
+  ];
+
   programs = {
     fish = {
       enable = true;
