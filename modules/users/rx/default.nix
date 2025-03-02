@@ -37,12 +37,24 @@
         config.enable = true;
         completions.enable = true;
       };
+
       shellAliases = {
         ls = "eza";
         ll = "eza -l";
         la = "eza -la";
         l = "eza -l";
+        nxr = "sudo nixos-rebuild switch --flake /etc/nixos#default";
+        nxu = "sudo nix flake update --flake /etc/nixos/";
       };
+
+      interactiveShellInit = "
+        function nxc-toggle
+            set owner (stat -c '%U' /etc/nixos)
+            sudo chown -R (test $owner != $USER; and echo $USER:users; or echo root:root) /etc/nixos
+            set state (test $owner != $USER; and echo 'unlocked'; or echo 'locked')
+            echo \"nxc-toggle: $state /etc/nixos\"
+        end
+      ";
     };
   };
 }
