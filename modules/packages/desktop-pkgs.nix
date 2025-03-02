@@ -15,7 +15,6 @@
 
   programs = {
     firefox.enable = true;
-    fish.enable = true;
 
     htop = {
       enable = true;

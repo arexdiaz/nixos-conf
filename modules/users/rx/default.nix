@@ -28,4 +28,21 @@
       "rx" = import ./home-manager.nix;
     };
   };
+
+  programs = {
+    fish = {
+      enable = true;
+      vendor = {
+        functions.enable = true;
+        config.enable = true;
+        completions.enable = true;
+      };
+      shellAliases = {
+        ls = "eza";
+        ll = "eza -l";
+        la = "eza -la";
+        l = "eza -l";
+      };
+    };
+  };
 }
