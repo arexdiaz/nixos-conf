@@ -9,7 +9,6 @@
     git
     nix-init
     profile-sync-daemon
-    python3
     tlrc
     vim
     wget

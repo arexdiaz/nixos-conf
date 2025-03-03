@@ -9,6 +9,7 @@
       ../../packages/desktop/hideo-pkgs.nix
       ../../packages/desktop/tools-pkgs.nix
       ../../packages/fish-shell.nix
+      ../../packages/programming/python.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
