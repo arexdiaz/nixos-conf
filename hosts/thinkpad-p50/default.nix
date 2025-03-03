@@ -6,6 +6,7 @@
       ../../modules/packages/core-pkgs.nix
       ../../modules/packages/desktop-pkgs.nix
       ../../modules/packages/entertainment-pkgs.nix
+      ../../modules/packages/fish.nix
       ../../modules/packages/hideo-pkgs.nix
       ../../modules/packages/tools-pkgs.nix
       ../../modules/networking.nix
