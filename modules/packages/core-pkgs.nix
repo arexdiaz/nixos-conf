@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     binwalk
     fzf
+    git
     nix-init
     profile-sync-daemon
     python3

@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hosts/thinkpad-p50
+      ./modules/hosts/thinkpad-p50
     ];
 
   # Enable the Nix flake support
