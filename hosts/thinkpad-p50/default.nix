@@ -4,11 +4,11 @@
   imports = [
       ./hardware-configuration.nix
       ../../modules/packages/core-pkgs.nix
-      ../../modules/packages/desktop-pkgs.nix
-      ../../modules/packages/entertainment-pkgs.nix
-      ../../modules/packages/fish.nix
-      ../../modules/packages/hideo-pkgs.nix
-      ../../modules/packages/tools-pkgs.nix
+      ../../modules/packages/desktop/desktop-pkgs.nix
+      ../../modules/packages/desktop/entertainment-pkgs.nix
+      ../../modules/packages/desktop/hideo-pkgs.nix
+      ../../modules/packages/desktop/tools-pkgs.nix
+      ../../modules/packages/fish-shell.nix
       ../../modules/networking.nix
       ../../modules/services.nix
       ../../modules/system.nix
