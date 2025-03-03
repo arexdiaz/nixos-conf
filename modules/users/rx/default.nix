@@ -36,6 +36,7 @@
     fishPlugins.hydro
     fishPlugins.grc
     grc
+    eza
   ];
 
   programs = {
