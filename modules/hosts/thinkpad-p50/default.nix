@@ -9,7 +9,7 @@
       ../../packages/desktop/hideo-pkgs.nix
       ../../packages/desktop/tools-pkgs.nix
       ../../packages/fish-shell.nix
-      ../../packages/programming/python.nix
+      ../../packages/development/qemu.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
@@ -24,4 +24,5 @@
 
   # Enable beta nvidia drivers
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  programs.nix-ld.enable = true;
 }

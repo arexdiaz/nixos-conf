@@ -37,7 +37,7 @@
             echo \"nxc-toggle: $state /etc/nixos\"
         end
         
-        ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+        # ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       ";
     };
 

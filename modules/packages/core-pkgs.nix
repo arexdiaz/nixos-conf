@@ -12,6 +12,9 @@
     tlrc
     vim
     wget
+    unzip
+    unrar-wrapper
+    p7zip
   ];
 
   # Nixos options
