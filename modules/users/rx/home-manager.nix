@@ -55,6 +55,12 @@
       ".config/psd/psd.conf".text = ''
         USE_OVERLAYFS="yes"
       '';
+
+      ".config/libvirt/qemu.conf".text = if pkgs.qemu_kvm != null then ''
+        # Adapted from /var/lib/libvirt/qemu.conf
+        # Note that AAVMF and OVMF are for Aarch64 and x86 respectively
+        nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ];
+      '' else null;
     };
 
     # Home Manager can also manage your environment variables through
