@@ -8,8 +8,8 @@
       ../../packages/desktop/entertainment-pkgs.nix
       ../../packages/desktop/hideo-pkgs.nix
       ../../packages/desktop/tools-pkgs.nix
-      ../../packages/fish-shell.nix
       ../../packages/development/qemu.nix
+      ../../packages/fish-shell.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
