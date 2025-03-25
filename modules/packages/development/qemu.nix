@@ -9,6 +9,10 @@ let
       mkdir -p $out
       genisoimage -o $out/virtio-win.iso -J -R $src
     '';
+    postInstall = ''
+      mkdir -p /var/lib/libvirt/images
+      ln -sf $out/virtio-win.iso /var/lib/libvirt/images/virtio-win.iso
+    '';
   };
 in {
   programs.virt-manager.enable = true;
@@ -17,11 +21,6 @@ in {
   environment.systemPackages = with pkgs; [
     virt-manager
     virtioWinISO
-  ];
-
-  systemd.tmpfiles.rules = [
-    "d /var/lib/libvirt/images 0775 root libvirtd - -"
-    "L+ /var/lib/libvirt/images/virtio-win.iso - - - - ${virtioWinISO}/virtio-win.iso"
   ];
 
   virtualisation.libvirtd = {
