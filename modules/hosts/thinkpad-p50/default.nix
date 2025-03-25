@@ -11,7 +11,7 @@
       ../../packages/desktop/tools-pkgs.nix
       ../../packages/development/qemu.nix
       ../../packages/fish-shell.nix
-      ../../system/kernel/cachyos.nix
+      ../../packages/system/kernel/chachyos.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
