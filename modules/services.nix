@@ -6,13 +6,6 @@
     psd.enable = true;
     psd.resyncTimer = "10m";
 
-    # Scx scheduler config
-    scx = {
-      package = pkgs.scx_git.full;
-      scheduler = "scx_bpfland";
-      enable = true;
-    };
-
     # Enable the X11 windowing system.
     # You can disable this if you're only using the Wayland session.
     xserver.enable = true;
