@@ -4,6 +4,7 @@
   imports = [
       ./hardware-configuration.nix
       ../../packages/core-pkgs.nix
+      ../../packages/desktop/shell/kde.nix
       ../../packages/desktop/desktop-pkgs.nix
       ../../packages/desktop/entertainment-pkgs.nix
       ../../packages/desktop/hideo-pkgs.nix
