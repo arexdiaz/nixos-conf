@@ -6,6 +6,7 @@
     environment.systemPackages = with pkgs; [
       burpsuite
       nmap
+      remmina
       wireshark
     ];
 }
