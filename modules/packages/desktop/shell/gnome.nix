@@ -11,9 +11,6 @@
     # GNOME 47: triple-buffering-v4-47
     (final: prev: {
       mutter = prev.mutter.overrideAttrs (oldAttrs: {
-        # GNOME dynamic triple buffering (huge performance improvement)
-        # See https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/1441
-        # Also https://gitlab.gnome.org/vanvugt/mutter/-/tree/triple-buffering-v4-47
         src = final.fetchFromGitLab {
           domain = "gitlab.gnome.org";
           owner = "vanvugt";
@@ -21,9 +18,6 @@
           rev = "triple-buffering-v4-47";
           hash = "sha256-6n5HSbocU8QDwuhBvhRuvkUE4NflUiUKE0QQ5DJEzwI=";
         };
-
-        # GNOME 47 requires the gvdb subproject which is not included in the triple-buffering branch
-        # This copies the necessary gvdb files from the official GNOME repository
         preConfigure = let
           gvdb = final.fetchFromGitLab {
             domain = "gitlab.gnome.org";
