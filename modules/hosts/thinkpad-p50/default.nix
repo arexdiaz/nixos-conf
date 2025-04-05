@@ -25,6 +25,9 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable beta nvidia drivers
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.beta; # Available options: stable | beta
+  };
+  boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
 }
