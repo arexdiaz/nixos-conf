@@ -3,10 +3,34 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
   };
 
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.forge
+    gnomeExtensions.logo-menu
+    gnomeExtensions.open-bar
+    ulauncher
+  ];
+
+  systemd.user.services.ulauncher = {
+    description = "Start Ulauncher at login";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.ulauncher}/bin/ulauncher --hide-window";
+      Restart = "on-failure";
+      RestartSec = "5";
+    };
+  };
+
+  environment.variables.NIXOS_OZONE_WL = "1"; # Fixes Firefox/Chromium on Wayland
+  hardware.nvidia.modesetting.enable = true; # Required for Wayland
   nixpkgs.overlays = [
     # GNOME 47: triple-buffering-v4-47
     (final: prev: {
