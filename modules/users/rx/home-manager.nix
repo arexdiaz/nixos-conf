@@ -41,6 +41,7 @@
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
+      pkgs.ulauncher
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -61,6 +62,17 @@
         # Note that AAVMF and OVMF are for Aarch64 and x86 respectively
         nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ];
       '' else null;
+
+      ".config/autostart/ulauncher.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Exec=ulauncher --hide-window
+        Hidden=false
+        NoDisplay=false
+        X-GNOME-Autostart-enabled=true
+        Name=Ulauncher
+        Comment=Application launcher
+      '';
     };
 
     # Home Manager can also manage your environment variables through
