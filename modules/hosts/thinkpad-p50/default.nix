@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports = [
@@ -28,6 +28,16 @@
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.beta; # Available options: stable | beta
   };
+
   boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
+
+  # Modify systemd-suspend configuration to fix issue 
+  # Not sure if this is a gnome only issue but just in case
+  # Tired of troubleshooting issue on linux
+  systemd.services."systemd-suspend" = lib.mkIf config.services.xserver.desktopManager.gnome.enable {
+    serviceConfig = {
+      Environment = "SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false";
+    };
+  };
 }
