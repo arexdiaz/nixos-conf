@@ -17,7 +17,7 @@ let
 in {
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = ["rx"];
-  
+
   environment.systemPackages = with pkgs; [
     virt-manager
     virtioWinISO
