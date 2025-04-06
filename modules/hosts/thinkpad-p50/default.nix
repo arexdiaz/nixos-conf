@@ -32,6 +32,9 @@
   boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
 
+  # Disable wayland due to hybrid gpus not playing well with wayland
+  services.xserver.displayManager.gdm.wayland = false;
+  
   # Modify systemd-suspend configuration to fix issue 
   # Not sure if this is a gnome only issue but just in case
   # Tired of troubleshooting issue on linux

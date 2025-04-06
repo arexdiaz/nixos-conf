@@ -26,7 +26,7 @@
       efi.canTouchEfiVariables = true; };
     
     # Load OverlayFS kernel module (required for OverlayFS)
-    kernelModules = [ "overlay" "i2c-dev" "i2c-i801" ];
+    kernelModules = [ "overlay" ];
   };
 
   hardware = {

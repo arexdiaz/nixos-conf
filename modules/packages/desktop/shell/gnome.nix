@@ -1,16 +1,13 @@
 { config, pkgs, lib, inputs, ... }:
-
 {
   services.xserver = {
     enable = true;
     desktopManager.gnome.enable = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+    displayManager.gdm.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
+    ddcutil # required by brightess control
     gnomeExtensions.brightness-control-using-ddcutil
     gnomeExtensions.dash-to-dock
     gnomeExtensions.forge
@@ -18,16 +15,17 @@
     gnomeExtensions.open-bar
   ];
 
-  users.extraGroups = lib.optionalAttrs (pkgs.gnomeExtensions.brightness-control-using-ddcutil != null) {
+  # required by brightess control
+  users.extraGroups = {
     i2c = {};
   };
 
-  services.udev.extraRules = lib.optionalString (pkgs.gnomeExtensions.brightness-control-using-ddcutil != null) ''
+  # required by brightess control
+  services.udev.extraRules = ''
     KERNEL=="i2c-[0-9]*", MODE="0660", GROUP="i2c"
   '';
 
   environment.variables.NIXOS_OZONE_WL = "1"; # Fixes Firefox/Chromium on Wayland
-  hardware.nvidia.modesetting.enable = true; # Required for Wayland
   nixpkgs.overlays = [
     # GNOME 47: triple-buffering-v4-47
     (final: prev: {
