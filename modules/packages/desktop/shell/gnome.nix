@@ -11,23 +11,20 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gnomeExtensions.brightness-control-using-ddcutil
     gnomeExtensions.dash-to-dock
     gnomeExtensions.forge
     gnomeExtensions.logo-menu
     gnomeExtensions.open-bar
-    ulauncher
   ];
 
-  systemd.user.services.ulauncher = {
-    description = "Start Ulauncher at login";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.ulauncher}/bin/ulauncher --hide-window";
-      Restart = "on-failure";
-      RestartSec = "5";
-    };
+  users.extraGroups = lib.optionalAttrs (pkgs.gnomeExtensions.brightness-control-using-ddcutil != null) {
+    i2c = {};
   };
+
+  services.udev.extraRules = lib.optionalString (pkgs.gnomeExtensions.brightness-control-using-ddcutil != null) ''
+    KERNEL=="i2c-[0-9]*", MODE="0660", GROUP="i2c"
+  '';
 
   environment.variables.NIXOS_OZONE_WL = "1"; # Fixes Firefox/Chromium on Wayland
   hardware.nvidia.modesetting.enable = true; # Required for Wayland
