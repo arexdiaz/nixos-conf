@@ -9,7 +9,7 @@
       ../../packages/desktop/entertainment-pkgs.nix
       ../../packages/desktop/hideo-pkgs.nix
       ../../packages/desktop/tools-pkgs.nix
-      ../../packages/development/qemu.nix
+      ../../packages/desktop/qemu.nix
       ../../packages/fish-shell.nix
       ../../packages/system/kernel/chachyos.nix
       ../../networking.nix
