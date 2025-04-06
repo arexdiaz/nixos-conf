@@ -27,6 +27,7 @@
         l = "eza -l";
         nxr = "sudo nixos-rebuild switch --flake /etc/nixos#default";
         nxu = "sudo nix flake update --flake /etc/nixos/";
+        fish-dev = "nix develop --command fish";
       };
 
       interactiveShellInit = "
