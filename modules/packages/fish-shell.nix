@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -20,15 +20,16 @@
         completions.enable = true;
       };
 
-      shellAliases = {
-        ls = "eza";
-        ll = "eza -l";
-        la = "eza -la";
-        l = "eza -l";
-        nxr = "sudo nixos-rebuild switch --flake /etc/nixos#default";
-        nxu = "sudo nix flake update --flake /etc/nixos/";
-        fish-dev = "nix develop --command fish";
-      };
+      shellAliases = lib.mkMerge [
+        {
+          ls = "eza";
+          ll = "eza -l";
+          la = "eza -la";
+          l = "eza -l";
+          nxr = "sudo nixos-rebuild switch --flake /etc/nixos#default";
+          nxu = "sudo nix flake update --flake /etc/nixos/";
+        }
+      ];
 
       interactiveShellInit = "
         function nxc-toggle
@@ -37,7 +38,15 @@
             set state (test $owner != $USER; and echo 'unlocked'; or echo 'locked')
             echo \"nxc-toggle: $state /etc/nixos\"
         end
-        
+
+        function fish-dev
+          if test (count $argv) -ne 1
+              echo 'Usage: fish-dev <path>'
+              return 1
+          end
+          nix develop $argv[1] --command fish
+        end
+
         # ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       ";
     };
