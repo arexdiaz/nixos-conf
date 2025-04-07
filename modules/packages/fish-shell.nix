@@ -47,6 +47,11 @@
           nix develop $argv[1] --command fish
         end
 
+        for dir in (ls -d /etc/nixos/modules/development/*/)
+            set alias_name (basename $dir)
+            alias $alias_name=\"fish-dev $dir\"
+        end
+        
         # ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       ";
     };

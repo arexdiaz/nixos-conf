@@ -19,7 +19,7 @@
         ];
 
         shellHook = ''
-          echo "Welcome to your Next.js development shell!"
+          echo "Node dev env loaded"
         '';
       };
     };
