@@ -4,7 +4,7 @@
   imports = [
       ./hardware-configuration.nix
       ../../packages/core-pkgs.nix
-      ../../packages/desktop/shell/gnome.nix
+      ../../packages/desktop/shell/kde.nix
       ../../packages/desktop/desktop-pkgs.nix
       ../../packages/desktop/entertainment-pkgs.nix
       ../../packages/desktop/hideo-pkgs.nix
@@ -26,21 +26,16 @@
 
   # Enable beta nvidia drivers
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.beta; # Available options: stable | beta
+    package = config.boot.kernelPackages.nvidiaPackages.stable; # Available options: stable | beta
   };
 
   boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
 
   # Disable wayland due to hybrid gpus not playing well with wayland
-  services.xserver.displayManager.gdm.wayland = false;
-  
-  # Modify systemd-suspend configuration to fix issue 
-  # Not sure if this is a gnome only issue but just in case
-  # Tired of troubleshooting issue on linux
-  systemd.services."systemd-suspend" = lib.mkIf config.services.xserver.desktopManager.gnome.enable {
-    serviceConfig = {
-      Environment = "SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false";
-    };
+  services = {
+    xserver.displayManager.gdm.wayland = false; # gnome
+    displayManager.sddm.wayland.enable = false; # kde
   };
+
 }
