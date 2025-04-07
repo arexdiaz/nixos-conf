@@ -11,7 +11,7 @@
       ../../packages/desktop/tools-pkgs.nix
       ../../packages/desktop/qemu.nix
       ../../packages/fish-shell.nix
-      ../../packages/system/kernel/chachyos.nix
+      # ../../packages/system/kernel/chachyos.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
@@ -31,11 +31,4 @@
 
   boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
-
-  # Disable wayland due to hybrid gpus not playing well with wayland
-  services = {
-    xserver.displayManager.gdm.wayland = false; # gnome
-    displayManager.sddm.wayland.enable = false; # kde
-  };
-
 }
