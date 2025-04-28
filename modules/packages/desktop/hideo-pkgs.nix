@@ -7,6 +7,7 @@
     bolt-launcher
     moonlight-qt
     runelite
+    parsec-bin
   ];
 
   programs = {
