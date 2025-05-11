@@ -10,9 +10,10 @@
       ../../packages/desktop/entertainment-pkgs.nix
       ../../packages/desktop/hideo-pkgs.nix
       ../../packages/desktop/tools-pkgs.nix
-      ../../packages/desktop/qemu.nix
+      # ../../packages/desktop/qemu.nix
       ../../packages/fish-shell.nix
       ../../packages/system/kernel/chachyos.nix
+      ../../packages/desktop/wine.nix
       ../../networking.nix
       ../../services.nix
       ../../system.nix
@@ -20,27 +21,24 @@
   ];
 
   networking.hostName = "scout";
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs;
-[nvidia-vaapi-driver];
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-
-  # Enable beta nvidia drivers
-  # hardware.nvidia = {
-    # open = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta; # Available options: stable | beta
-  # };
-
   boot.blacklistedKernelModules = [ "nouveau" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware = {
+    nvidia = {
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [nvidia-vaapi-driver];
+    };
+  };
+
   programs.nix-ld.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
+
   # services.thermald ={
   #   enable = true;
   # };
