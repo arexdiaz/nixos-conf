@@ -13,10 +13,11 @@
   environment.systemPackages = with pkgs; [
     kdePackages.kdeconnect-kde
     kdePackages.krdc
+    kdePackages.yakuake
   ];
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
-    konsole
     elisa
+    kate
   ];
 }
