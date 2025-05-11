@@ -17,7 +17,7 @@
       ../../services.nix
       ../../system.nix
       ../../users/rx
-      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
+      <nixos-hardware/lenovo/thinkpad/x220>
   ];
 
   networking.hostName = "lvnpc";

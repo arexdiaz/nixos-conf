@@ -39,6 +39,25 @@
   programs.nix-ld.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+    user="rx";
+  };
+
+  fileSystems = {
+    "/mnt/Stuff" = {
+      device = "/dev/disk/by-uuid/d4a092ab-ae4a-43b5-821b-3aa104a572a1";
+      fsType = "ext4";
+      options = [ "users" "nofail" "exec" ];
+    };
+    "/mnt/Stuff2" = {
+      device = "/dev/disk/by-uuid/CA33-738B";
+      fsType = "vfat";
+      options = [ "users" "nofail" "exec" ];
+    };
+  };
+  
   # services.thermald ={
   #   enable = true;
   # };
