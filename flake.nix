@@ -27,19 +27,19 @@
       nixosConfigurations = {
         "p50" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; };
+          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "p50"; };
           modules = [ ./modules/hosts/thinkpad-p50 ];
         };
 
         "scout" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; };
+          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "scout"; };
           modules = [ ./modules/hosts/scout ];
         };
 
         "m1" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "m1"; };
           modules = [ ./hosts/apple-m1 ];
         };
       };

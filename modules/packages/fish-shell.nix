@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, flakeTarget ? "default", ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -26,7 +26,7 @@
           ll = "eza -l";
           la = "eza -la";
           l = "eza -l";
-          nxr = "sudo nixos-rebuild switch --flake /etc/nixos#default";
+          nxr = "sudo nixos-rebuild switch --flake /etc/nixos#${flakeTarget}";
           nxu = "sudo nix flake update --flake /etc/nixos/";
         }
       ];
@@ -47,7 +47,7 @@
           nix develop $argv[1] --command fish
         end
 
-        for dir in (ls -d /etc/nixos/modules/development/*/)
+        for dir in (ls -d /etc/nixos/modules/shells/*/)
             set alias_name (basename $dir)
             alias $alias_name=\"fish-dev $dir\"
         end
