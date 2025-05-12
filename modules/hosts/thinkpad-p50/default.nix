@@ -1,29 +1,33 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, cRoot, ... }:
 
-{
-  imports = [
-      ./hardware-configuration.nix
-      ../../packages/core-pkgs.nix
-      ../../packages/desktop/shell/kde.nix
-      ../../packages/desktop/docker.nix
-      ../../packages/desktop/desktop-pkgs.nix
-      ../../packages/desktop/entertainment-pkgs.nix
-      ../../packages/desktop/hideo-pkgs.nix
-      ../../packages/desktop/tools-pkgs.nix
-      ../../packages/desktop/qemu.nix
-      ../../packages/fish-shell.nix
-      ../../packages/system/kernel/chachyos.nix
-      ../../networking.nix
-      ../../services.nix
-      ../../system.nix
-      ../../users/rx
-      <nixos-hardware/lenovo/thinkpad/x220>
+let
+  modules = [
+    "commons.nix"
+    "users/rx"
+    "packages/core-pkgs.nix"
+    "packages/desktop/shell/kde.nix"
+    "packages/desktop/docker.nix"
+    "packages/desktop/desktop-pkgs.nix"
+    "packages/desktop/entertainment-pkgs.nix"
+    "packages/desktop/hideo-pkgs.nix"
+    "packages/desktop/tools-pkgs.nix"
+    "packages/desktop/qemu.nix"
+    "packages/fish-shell.nix"
+    "packages/system/kernel/chachyos.nix"
   ];
 
-  networking.hostName = "lvnpc";
+  importModules = lib.map (path: "${cRoot}/modules/${path}") modules;
+in
+{
+  imports = [
+    ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
+  ] ++ importModules;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  networking = {
+    hostName = "lvnpc";
+    firewall.allowedTCPPorts = [ 3000 ];
+  }
 
   # Enable beta nvidia drivers
   hardware.nvidia = {
@@ -36,4 +40,6 @@
   services.thermald ={
     enable = true;
   };
+  
+  system.stateVersion = "24.11";
 }

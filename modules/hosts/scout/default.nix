@@ -1,24 +1,29 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, cRoot, ... }:
 
+let
+  modules = [
+    "common.nix"
+    "users/rx"
+    "packages/core-pkgs.nix"
+    "packages/desktop/shell/kde.nix"
+    "packages/desktop/docker.nix"
+    "packages/desktop/desktop-pkgs.nix"
+    "packages/desktop/entertainment-pkgs.nix"
+    "packages/desktop/hideo-pkgs.nix"
+    "packages/desktop/tools-pkgs.nix"
+    # "packages/desktop/qemu.nix"
+    "packages/fish-shell.nix"
+    "packages/system/kernel/chachyos.nix"
+    "packages/desktop/wine"
+  ];
+
+  # Prepend the common base path to each module file path
+  importModules = lib.map (path: "${cRoot}/modules/${path}") modules;
+in
 {
   imports = [
-      ./hardware-configuration.nix
-      ../../packages/core-pkgs.nix
-      ../../packages/desktop/shell/kde.nix
-      ../../packages/desktop/docker.nix
-      ../../packages/desktop/desktop-pkgs.nix
-      ../../packages/desktop/entertainment-pkgs.nix
-      ../../packages/desktop/hideo-pkgs.nix
-      ../../packages/desktop/tools-pkgs.nix
-      # ../../packages/desktop/qemu.nix
-      ../../packages/fish-shell.nix
-      ../../packages/system/kernel/chachyos.nix
-      ../../packages/desktop/wine.nix
-      ../../networking.nix
-      ../../services.nix
-      ../../system.nix
-      ../../users/rx
-  ];
+    ./hardware-configuration.nix
+  ] ++ importModules;
 
   networking.hostName = "scout";
   nixpkgs.config.allowUnfree = true;
@@ -61,4 +66,6 @@
   # services.thermald ={
   #   enable = true;
   # };
+
+  system.stateVersion = "24.11";
 }
