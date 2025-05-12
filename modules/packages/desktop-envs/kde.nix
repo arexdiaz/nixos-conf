@@ -1,8 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
-{
-  services = {
-    xserver.enable = true;
+# Make the entire KDE configuration conditional
+lib.mkIf config.desktopEnvs.kde.enable {
+  services = { # xserver.enable is now handled by the parent desktop-envs module
     desktopManager.plasma6.enable = true;
     displayManager = {
       sddm.enable = true;
@@ -15,6 +15,7 @@
     kdePackages.krdc
     kdePackages.yakuake
   ];
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
     elisa

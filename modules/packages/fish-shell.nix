@@ -47,7 +47,7 @@
           nix develop $argv[1] --command fish
         end
 
-        for dir in (ls -d /etc/nixos/modules/shells/*/)
+        for dir in (ls -d /etc/nixos/modules/devshells/*/)
             set alias_name (basename $dir)
             alias $alias_name=\"fish-dev $dir\"
         end

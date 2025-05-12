@@ -1,7 +1,7 @@
 { config, pkgs, lib, inputs, ... }:
-{
+
+lib.mkIf config.desktopEnvs.gnome.enable {
   services.xserver = {
-    enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
   };
@@ -19,15 +19,12 @@
   users.extraGroups = {
     i2c = {};
   };
-
-  # required by brightess control
   services.udev.extraRules = ''
     KERNEL=="i2c-[0-9]*", MODE="0660", GROUP="i2c"
   '';
 
-  environment.variables.NIXOS_OZONE_WL = "1"; # Fixes Firefox/Chromium on Wayland
+  environment.variables.NIXOS_OZONE_WL = "1";
   nixpkgs.overlays = [
-    # GNOME 47: triple-buffering-v4-47
     (final: prev: {
       mutter = prev.mutter.overrideAttrs (oldAttrs: {
         src = final.fetchFromGitLab {

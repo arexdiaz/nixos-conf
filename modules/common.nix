@@ -3,6 +3,10 @@
 {
   imports = [
     ./networking.nix
+    ./packages/core-pkgs.nix
+    ./packages/desktop-envs
+    ./packages/emulators
+    ./packages/virtualization
     ./services.nix
     ./system.nix
     inputs.home-manager.nixosModules.default
