@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [ makeWrapper appimage-run ];
 
-installPhase = ''
+  installPhase = ''
     runHook preInstall
 
     mkdir -p $out/bin
