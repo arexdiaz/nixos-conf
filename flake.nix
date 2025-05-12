@@ -6,17 +6,12 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    notion-app-electron.url = "github:arexdiaz/notion-app-electron";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    notion-app-electron = {
-      url = "github:arexdiaz/notion-app-electron";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

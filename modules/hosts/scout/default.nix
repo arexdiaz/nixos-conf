@@ -23,6 +23,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    inputs.nix-flatpak.nixosModules.nix-flatpak # will be moved later on
   ] ++ importModules;
 
   networking.hostName = "scout";

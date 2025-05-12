@@ -1,13 +1,15 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  imports = [
+    inputs.notion-app-electron.package.default
+  ];
+
   environment.systemPackages = with pkgs; [
     alacritty
     onlyoffice-desktopeditors
     vscode
-    inputs.notion-app-electron.packages.${pkgs.system}.default
+    notion-app-electron
   ];
 
   programs = {
