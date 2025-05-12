@@ -16,7 +16,7 @@ let
   };
 in
 {
-  options.virtualisation = {
+  options.vmTools = {
     virtualManager = {
       enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
       libvirtdMembers = lib.mkOption {
@@ -24,19 +24,28 @@ in
         default = [];
         description = "List of users to add to the libvirtd group.";
       };
+      virtioWinISO = {
+        enable = lib.mkEnableOption "Whether to install window drivers for virt manager.";
+      };
     };
-    virtioWinISO = {
-      enable = lib.mkEnableOption "Whether to install window drivers for virt manager.";
+    docker = {
+      enable = lib.mkEnableOption "Whether to enable Docker.";
+      users = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "List of users to add to the docker group.";
+      };
     };
-
   };
 
-  # Always import virtman.nix; its content will be conditional.
-  imports = [ ./virtman.nix ];
+  imports = [
+    ./virtman.nix
+    ./docker.nix
+  ];
 
   config = {
     environment.systemPackages = with pkgs;
-      lib.optionals config.virtualisation.virtioWinISO.enable [
+      lib.optionals config.vmTools.virtualManager.virtioWinISO.enable [
         virtioWinISO
       ];
   };

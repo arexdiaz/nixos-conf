@@ -4,14 +4,12 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/docker.nix"
     "packages/desktop-pkgs.nix"
     "packages/entertainment-pkgs.nix"
     "packages/hideo-pkgs.nix"
     "packages/tools-pkgs.nix"
     "packages/fish-shell.nix"
     "packages/kernel/chachyos.nix"
-    "packages/emulators"
   ];
 
   # Prepend the common base path to each module file path
@@ -47,13 +45,6 @@ in
     gaming = {
       lutris.enable = true;
       pcsx2.enable = true;
-    };
-  };
-  
-  virtualisation = {
-    virtualManager = {
-      enable = true;
-      libvirtdMembers = [ "rx" ];
     };
   };
 

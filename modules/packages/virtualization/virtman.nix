@@ -1,8 +1,8 @@
 { lib, config, pkgs, ... }:
 
-lib.mkIf config.virtualisation.virtualManager.enable {
+lib.mkIf config.vmTools.virtualManager.enable {
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = config.virtualisation.virtualManager.libvirtdMembers;
+  users.groups.libvirtd.members = config.vmTools.virtualManager.libvirtdMembers;
 
   environment.systemPackages = with pkgs; [
     virt-manager

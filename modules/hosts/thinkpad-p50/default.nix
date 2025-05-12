@@ -4,16 +4,12 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/core-pkgs.nix"
-    "packages/desktop/shell/kde.nix"
-    "packages/desktop/docker.nix"
-    "packages/desktop/desktop-pkgs.nix"
-    "packages/desktop/entertainment-pkgs.nix"
-    "packages/desktop/hideo-pkgs.nix"
-    "packages/desktop/tools-pkgs.nix"
-    "packages/desktop/qemu.nix"
+    "packages/desktop-pkgs.nix"
+    "packages/entertainment-pkgs.nix"
+    "packages/hideo-pkgs.nix"
+    "packages/tools-pkgs.nix"
     "packages/fish-shell.nix"
-    "packages/system/kernel/chachyos.nix"
+    "packages/kernel/chachyos.nix"
   ];
 
   importModules = lib.map (path: "${cRoot}/modules/${path}") modules;
@@ -39,6 +35,21 @@ in
   powerManagement.cpuFreqGovernor = "performance";
   services.thermald ={
     enable = true;
+  };
+
+  # local packages
+  desktopEnvs.kde.enable = true;
+  
+  vmTools = {
+    virtualManager = {
+      enable = true;
+      libvirtdMembers = [ "rx" ];
+      virtioWinISO.enable = true;
+    };
+    docker = {
+      enable = true;
+      users = [ "rx" ];
+    };
   };
   
   system.stateVersion = "24.11";
