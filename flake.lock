@@ -105,11 +105,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747073329,
-        "narHash": "sha256-scQ27LiotByFatLKsqQ5VQSG7ynyXigRgA9ob3CYqkg=",
+        "lastModified": 1747081732,
+        "narHash": "sha256-VnR33UmH0KzvTuVg+6oYkDVpnPuHanQisNUXytCRBPQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0b24658ec09908e5a6515cacc54f29d589c8423b",
+        "rev": "f0a7db5ec1d369721e770a45e4d19f8e48186a69",
         "type": "github"
       },
       "original": {
@@ -248,11 +248,11 @@
         "notionAur": "notionAur"
       },
       "locked": {
-        "lastModified": 1747079450,
-        "narHash": "sha256-UV6o38n0yn5gvfKnrwA41ZsPOwwJoiaG7ZbYlQmsNlM=",
+        "lastModified": 1747079807,
+        "narHash": "sha256-rZR6oTBE0nhSlxam3IgBjJ/HYnNm7YE1SdBUCO40StA=",
         "owner": "arexdiaz",
         "repo": "notion-app-electron",
-        "rev": "3a69ccebacf6812049c560d4b1f972745ca1b9cd",
+        "rev": "fdefeeb63855e4ab08fc17c0f370bb91fe58ad31",
         "type": "github"
       },
       "original": {
