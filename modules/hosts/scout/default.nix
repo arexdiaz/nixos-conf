@@ -4,7 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/desktop-pkgs.nix"
     "packages/entertainment-pkgs.nix"
     "packages/hideo-pkgs.nix"
     "packages/tools-pkgs.nix"
@@ -38,7 +37,10 @@ in
   };
 
   # local packages
-  desktopEnvs.kde.enable = true;
+  desktop = {
+    environment.kde.enable = true;
+    commonPkgs.enable = true;
+  };
 
   emulators = {
     wine.enable = true;

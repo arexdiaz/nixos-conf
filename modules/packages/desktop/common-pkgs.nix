@@ -1,10 +1,6 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
-{
-  imports = [
-    inputs.notion-app-electron.package.default
-  ];
-
+lib.mkIf config.desktop.commonPkgs.enable {
   environment.systemPackages = with pkgs; [
     alacritty
     onlyoffice-desktopeditors

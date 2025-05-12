@@ -1,6 +1,6 @@
 { config, pkgs, lib, inputs, ... }:
 
-lib.mkIf config.desktopEnvs.gnome.enable {
+lib.mkIf config.desktop.environment.gnome.enable {
   services.xserver = {
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;

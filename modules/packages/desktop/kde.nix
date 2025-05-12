@@ -1,7 +1,7 @@
 { config, pkgs, inputs, lib, ... }:
 
 # Make the entire KDE configuration conditional
-lib.mkIf config.desktopEnvs.kde.enable {
+lib.mkIf config.desktop.environment.kde.enable {
   services = { # xserver.enable is now handled by the parent desktop-envs module
     desktopManager.plasma6.enable = true;
     displayManager = {
