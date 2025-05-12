@@ -2,7 +2,7 @@
 
 let
   modules = [
-    "commons.nix"
+    "common.nix"
     "users/rx"
     "packages/core-pkgs.nix"
     "packages/desktop/shell/kde.nix"
@@ -27,7 +27,7 @@ in
   networking = {
     hostName = "lvnpc";
     firewall.allowedTCPPorts = [ 3000 ];
-  }
+  };
 
   # Enable beta nvidia drivers
   hardware.nvidia = {
