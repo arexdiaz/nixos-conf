@@ -4,7 +4,6 @@
   networking = {
     # Enable networking
     networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 22 80 443 3000 4242 8080 9001 ];
 
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
