@@ -13,13 +13,10 @@
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            # Core JS Tooling
-            nodejs_20 # Specify a Node.js version if needed, e.g., nodejs_20
+            nodejs_20
             yarn
             git
             pgadmin
-
-            # Add Prisma CLI and Engines
             prisma
             prisma-engines
             openssl
