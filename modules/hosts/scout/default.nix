@@ -4,9 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/entertainment-pkgs.nix"
-    "packages/hideo-pkgs.nix"
-    "packages/tools-pkgs.nix"
     "packages/fish-shell.nix"
     "packages/kernel/chachyos.nix"
   ];
@@ -27,11 +24,11 @@ in
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia = {
-      open = true;
+      open    = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
     graphics = {
-      enable = true;
+      enable        = true;
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
@@ -39,14 +36,19 @@ in
   # local packages
   desktop = {
     environment.kde.enable = true;
-    commonPkgs.enable = true;
+    pkgs = {
+      common.enable = true;
+      games.enable  = true;
+      media.enable  = true;
+      tools.enable  = true;
+    };
   };
 
   emulators = {
-    wine.enable = true;
+    wine.enable     = true;
     gaming = {
       lutris.enable = true;
-      pcsx2.enable = true;
+      pcsx2.enable  = true;
     };
   };
 
@@ -54,20 +56,20 @@ in
   powerManagement.cpuFreqGovernor = "performance";
 
   services.plex = {
-    enable = true;
-    openFirewall = true;
-    user="rx";
+    enable        = true;
+    openFirewall  = true;
+    user          = "rx";
   };
 
   fileSystems = {
     "/mnt/Stuff" = {
-      device = "/dev/disk/by-uuid/d4a092ab-ae4a-43b5-821b-3aa104a572a1";
-      fsType = "ext4";
+      device  = "/dev/disk/by-uuid/d4a092ab-ae4a-43b5-821b-3aa104a572a1";
+      fsType  = "ext4";
       options = [ "users" "nofail" "exec" ];
     };
     "/mnt/Stuff2" = {
-      device = "/dev/disk/by-uuid/CA33-738B";
-      fsType = "vfat";
+      device  = "/dev/disk/by-uuid/CA33-738B";
+      fsType  = "vfat";
       options = [ "users" "nofail" "exec" ];
     };
   };
