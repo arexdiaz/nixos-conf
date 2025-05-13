@@ -4,8 +4,8 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/fish-shell.nix"
-    "packages/kernel/chachyos.nix"
+    "fish-shell.nix"
+    "kernel/chachyos.nix"
   ];
 
   # Prepend the common base path to each module file path
