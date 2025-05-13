@@ -34,19 +34,20 @@ in
   };
 
   # local packages
-  desktop = {
-    environment.kde.enable = true;
-    pkgs = {
+  pkgs = {
+    desktop.environment.kde.enable = true;
+    bundle = {
+      core.enable   = true;
       common.enable = true;
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
       emulators = {
-        enable = true;
+        enable      = true;
         wine.enable = true;
         gaming = {
           lutris.enable = true;
-          pcsx2.enable = true;
+          pcsx2.enable  = true;
         };
       };
     };
