@@ -4,8 +4,8 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/fish-shell.nix"
-    "packages/kernel/chachyos.nix"
+    "fish-shell.nix"
+    "kernel/chachyos.nix"
   ];
 
   importModules = lib.map (path: "${cRoot}/modules/${path}") modules;
@@ -34,27 +34,28 @@ in
   };
 
   # local packages
-  desktop = {
-    environment.kde.enable = true;
-    pkgs = {
+  pkgs = {
+    desktop.environment.kde.enable = true;
+    bundle = {
+      core.enable = true;
       common.enable = true;
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
+      virtualisation = {
+        virtualManager = {
+          enable = true;
+          libvirtdMembers = [ "rx" ];
+          virtioWinISO.enable = false;
+        };
+        docker = {
+          enable = false;
+          users = [ "rx" ];
+        };
+      };
     };
   };
   
-  vmTools = {
-    virtualManager = {
-      enable = true;
-      libvirtdMembers = [ "rx" ];
-      virtioWinISO.enable = true;
-    };
-    docker = {
-      enable = true;
-      users = [ "rx" ];
-    };
-  };
   
   system.stateVersion = "24.11";
 }

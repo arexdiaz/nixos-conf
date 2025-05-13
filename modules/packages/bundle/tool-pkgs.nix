@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-lib.mkIf config.desktop.pkgs.tools.enable {
+lib.mkIf config.pkgs.bundle.tools.enable {
   environment.systemPackages = with pkgs; [
     burpsuite
     nmap

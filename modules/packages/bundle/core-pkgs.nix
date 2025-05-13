@@ -1,6 +1,6 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
+lib.mkIf config.pkgs.bundle.core.enable {
   environment.systemPackages = with pkgs; [
     binwalk
     fzf

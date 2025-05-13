@@ -2,10 +2,8 @@
 
 {
   imports = [
+    ./packages
     ./networking.nix
-    ./packages/core-pkgs.nix
-    ./packages/desktop
-    ./packages/virtualization
     ./services.nix
     ./system.nix
     inputs.home-manager.nixosModules.default

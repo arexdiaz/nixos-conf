@@ -1,6 +1,6 @@
 { config, pkgs, inputs, lib, ... }:
 
-lib.mkIf config.desktop.pkgs.common.enable {
+lib.mkIf config.pkgs.bundle.common.enable {
   environment.systemPackages = with pkgs; [
     alacritty
     onlyoffice-desktopeditors
