@@ -46,7 +46,7 @@ in
         virtualManager = {
           enable = true;
           libvirtdMembers = [ "rx" ];
-          virtioWinISO.enable = false;
+          virtioWinISO.enable = true;
         };
         docker = {
           enable = false;
