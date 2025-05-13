@@ -2,11 +2,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "pcsx2";
-  version = "2.3.337";
+  version = "2.3.343";
 
   src = fetchurl {
     url = "https://github.com/PCSX2/pcsx2/releases/download/v${finalAttrs.version}/pcsx2-v${finalAttrs.version}-linux-appimage-x64-Qt.AppImage";
-    hash = "sha256-BkanViln4UFSmF9jOoelOT1umcoCiPJrSzQlCcSB8ig=";
+    hash = "sha256-0GM+jM/NNE7ChaIRzaeHM/aJ8KmhzVSYZoFMVMG65zA=";
   };
 
   dontUnpack = true;
