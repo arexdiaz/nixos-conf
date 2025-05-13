@@ -41,7 +41,7 @@ in
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
-      shell.fish.enable = true; # add a make shell default option
+      shell.fish.enable = true; # add a set default shell option
       virtualisation = {
         virtualManager = {
           enable = true;
