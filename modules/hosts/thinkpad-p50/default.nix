@@ -43,6 +43,7 @@ in
       tools.enable  = true;
       shell.fish.enable = true; # add a set default shell option
       virtualisation = {
+        enable = true;
         virtualManager = {
           enable = true;
           libvirtdMembers = [ "rx" ];

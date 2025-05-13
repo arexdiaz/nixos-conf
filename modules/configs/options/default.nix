@@ -52,6 +52,7 @@
         };
       };
       virtualisation = {
+        enable = lib.mkEnableOption "Whether to enable virtualization packages.";
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
           libvirtdMembers = lib.mkOption {
