@@ -41,14 +41,14 @@ in
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
-    };
-  };
-
-  emulators = {
-    wine.enable     = true;
-    gaming = {
-      lutris.enable = true;
-      pcsx2.enable  = true;
+      emulators = {
+        enable = true;
+        wine.enable = true;
+        gaming = {
+          lutris.enable = true;
+          pcsx2.enable = true;
+        };
+      };
     };
   };
 

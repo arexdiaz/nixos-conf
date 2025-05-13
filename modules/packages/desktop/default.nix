@@ -1,7 +1,15 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  imports = [ ./kde.nix ./gnome.nix ./common-pkgs.nix ./media-pkgs.nix ./tool-pkgs.nix ./game-pkgs.nix ];
+  imports = [
+    ./kde.nix
+    ./gnome.nix
+    ./pkgs/common-pkgs.nix
+    ./pkgs/media-pkgs.nix
+    ./pkgs/tool-pkgs.nix
+    ./pkgs/game-pkgs.nix
+    ./pkgs/emulators
+  ];
 
   options.desktop = {
     environment = {
@@ -27,6 +35,9 @@
       };
       tools = {
         enable = lib.mkEnableOption "Whether to enable tool packages.";
+      };
+      emulators = {
+        enable = lib.mkEnableOption "Whether to enable emulator packages and configurations.";
       };
     };
   };

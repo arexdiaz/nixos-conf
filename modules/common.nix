@@ -5,7 +5,6 @@
     ./networking.nix
     ./packages/core-pkgs.nix
     ./packages/desktop
-    ./packages/emulators
     ./packages/virtualization
     ./services.nix
     ./system.nix
