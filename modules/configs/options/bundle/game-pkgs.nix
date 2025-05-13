@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-lib.mkIf config.pkgs.bundle.games.enable {
+lib.mkIf config.preconfs.bundle.games.enable {
   environment.systemPackages = with pkgs; [
     bolt-launcher
     moonlight-qt

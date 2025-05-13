@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-lib.mkIf config.pkgs.bundle.media.enable {
+lib.mkIf config.preconfs.bundle.media.enable {
   environment.systemPackages = with pkgs; [
     qbittorrent-enhanced
     spotify

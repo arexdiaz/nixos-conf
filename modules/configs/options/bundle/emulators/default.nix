@@ -8,7 +8,7 @@ let
 in
 {
   # Options are defined unconditionally at the module level.
-  options.pkgs.bundle.emulators = {
+  options.preconfs.bundle.emulators = {
     wine = {
       enable = lib.mkEnableOption "Whether to install Wine and Winetricks compatibility layer.";
     };
@@ -23,14 +23,14 @@ in
   };
 
   # The configuration (effect of the options) is conditional.
-  config = lib.mkIf config.pkgs.bundle.emulators.enable {
+  config = lib.mkIf config.preconfs.bundle.emulators.enable {
     environment.systemPackages = with pkgs;
-      lib.optionals config.pkgs.bundle.emulators.wine.enable [
+      lib.optionals config.preconfs.bundle.emulators.wine.enable [
         wine
         winetricks
-      ] ++ lib.optionals config.pkgs.bundle.emulators.gaming.pcsx2.enable [
+      ] ++ lib.optionals config.preconfs.bundle.emulators.gaming.pcsx2.enable [
         pcsx2wrap
-      ] ++ lib.optionals config.pkgs.bundle.emulators.gaming.lutris.enable [
+      ] ++ lib.optionals config.preconfs.bundle.emulators.gaming.lutris.enable [
         gamescope
         lutris
         mangohud

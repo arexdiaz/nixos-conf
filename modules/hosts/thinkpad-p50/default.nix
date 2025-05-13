@@ -4,7 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "fish-shell.nix"
     "kernel/chachyos.nix"
   ];
 
@@ -42,6 +41,7 @@ in
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
+      shell.fish.enable = true; # add a make shell default option
       virtualisation = {
         virtualManager = {
           enable = true;

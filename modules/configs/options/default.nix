@@ -10,11 +10,12 @@
     ./bundle/game-pkgs.nix
     ./bundle/media-pkgs.nix
     ./bundle/tool-pkgs.nix
+    ./bundle/shell/fish-shell.nix
     ./bundle/virtualization/docker.nix
     ./bundle/virtualization/virtman.nix
   ];
 
-  options.pkgs = {
+  options.preconfs = {
     desktop.environment = {
       kde = {
         enable = lib.mkEnableOption "Whether to enable and configure the KDE Plasma desktop environment.";
@@ -45,6 +46,11 @@
       tools = {
         enable = lib.mkEnableOption "Whether to enable tool packages.";
       };
+      shell = {
+        fish = {
+            enable = lib.mkEnableOption "Whether to enable fish shell.";
+        };
+      };
       virtualisation = {
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
@@ -71,6 +77,6 @@
 
   config = {
     # Enable the X server if the corresponding option is set
-    services.xserver.enable = config.pkgs.desktop.environment.xserver.enable;
+    services.xserver.enable = config.preconfs.desktop.environment.xserver.enable;
   };
 }

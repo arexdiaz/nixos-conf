@@ -1,7 +1,7 @@
  { lib, config, pkgs, ... }:
 
 # This module's content is conditional on the docker enable option
-lib.mkIf config.pkgs.bundle.virtualisation.docker.enable {
+lib.mkIf config.preconfs.bundle.virtualisation.docker.enable {
   environment.systemPackages = with pkgs; [
     docker-compose
   ];
@@ -11,9 +11,9 @@ lib.mkIf config.pkgs.bundle.virtualisation.docker.enable {
 
   # Add specified users to the 'docker' group
   # This uses the `users` option defined in virtualization/default.nix
-  users.extraGroups.docker.members = config.pkgs.bundle.virtualisation.docker.users;
+  users.extraGroups.docker.members = config.preconfs.bundle.virtualisation.docker.users;
   users.users = builtins.listToAttrs (map (userName: {
     name = userName;
     value.extraGroups = [ "docker" ];
-  }) config.pkgs.bundle.virtualisation.docker.users);
+  }) config.preconfs.bundle.virtualisation.docker.users);
 }

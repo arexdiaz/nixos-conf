@@ -1,6 +1,6 @@
 { config, pkgs, lib, flakeTarget ? "default", ... }:
 
-{
+lib.mkIf config.preconfs.bundle.shell.fish.enable {
   environment.systemPackages = with pkgs; [
     fishPlugins.done
     fishPlugins.fzf

@@ -4,7 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "fish-shell.nix"
     "kernel/chachyos.nix"
   ];
 
@@ -34,17 +33,18 @@ in
   };
 
   # local packages
-  pkgs = {
+  preconfs = {
     desktop.environment.kde.enable = true;
     bundle = {
-      core.enable   = true;
-      common.enable = true;
-      games.enable  = true;
-      media.enable  = true;
-      tools.enable  = true;
+      core.enable       = true;
+      common.enable     = true;
+      games.enable      = true;
+      media.enable      = true;
+      tools.enable      = true;
+      shell.fish.enable = true;
       emulators = {
-        enable      = true;
-        wine.enable = true;
+        enable          = true;
+        wine.enable     = true;
         gaming = {
           lutris.enable = true;
           pcsx2.enable  = true;
