@@ -4,10 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "packages/desktop-pkgs.nix"
-    "packages/entertainment-pkgs.nix"
-    "packages/hideo-pkgs.nix"
-    "packages/tools-pkgs.nix"
     "packages/fish-shell.nix"
     "packages/kernel/chachyos.nix"
   ];
@@ -38,7 +34,15 @@ in
   };
 
   # local packages
-  desktopEnvs.kde.enable = true;
+  desktop = {
+    environment.kde.enable = true;
+    pkgs = {
+      common.enable = true;
+      games.enable  = true;
+      media.enable  = true;
+      tools.enable  = true;
+    };
+  };
   
   vmTools = {
     virtualManager = {
