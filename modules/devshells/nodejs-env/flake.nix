@@ -23,16 +23,9 @@
           ];
 
           shellHook = ''
-            echo "Node.js and Prisma dev env loaded"
-
-            # Optional: Set PRISMA_SCHEMA_ENGINE_BINARY if still needed,
-            # but usually the prisma-engines package handles this.
             export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
             export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query_engine"
             export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
-            # LOCAL_IP=$(ip route get 1.1.1.1 | awk '{print $7}')
-            # export NEXTAUTH_URL="http://$LOCAL_IP:3000"
-            # Add node_modules/.bin to PATH for locally installed CLIs like next
             export PATH="./node_modules/.bin:$PATH"
           '';
         };
