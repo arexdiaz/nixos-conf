@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-lib.mkIf config.preconfs.bundle.core.enable {
+lib.mkIf config.preconfs.pkgs.core.enable {
   environment.systemPackages = with pkgs; [
     binwalk
     fzf

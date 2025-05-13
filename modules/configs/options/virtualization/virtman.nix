@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 let
-  vmCfg = config.preconfs.bundle.virtualisation.virtualManager;
+  vmCfg = config.preconfs.pkgs.virtualisation.virtualManager;
   isoCfg = vmCfg.virtioWinISO;
   symlinkPath = "/var/lib/libvirt/images/virtio-win.iso";
 

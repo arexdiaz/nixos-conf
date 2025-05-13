@@ -4,7 +4,6 @@ let
   modules = [
     "common.nix"
     "users/rx"
-    "kernel/chachyos.nix"
   ];
 
   # Prepend the common base path to each module file path
@@ -35,7 +34,7 @@ in
   # local packages
   preconfs = {
     desktop.environment.kde.enable = true;
-    bundle = {
+    pkgs = {
       core.enable       = true;
       common.enable     = true;
       games.enable      = true;

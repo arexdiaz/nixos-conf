@@ -4,15 +4,16 @@
   imports = [
     ./environment/kde.nix
     ./environment/gnome.nix
-    ./bundle/core-pkgs.nix
-    ./bundle/common-pkgs.nix
-    ./bundle/emulators
-    ./bundle/game-pkgs.nix
-    ./bundle/media-pkgs.nix
-    ./bundle/tool-pkgs.nix
-    ./bundle/shell/fish-shell.nix
-    ./bundle/virtualization/docker.nix
-    ./bundle/virtualization/virtman.nix
+    ./core-pkgs.nix
+    ./common-pkgs.nix
+    ./emulators
+    ./game-pkgs.nix
+    ./kernel
+    ./media-pkgs.nix
+    ./tool-pkgs.nix
+    ./shell/fish-shell.nix
+    ./virtualization/docker.nix
+    ./virtualization/virtman.nix
   ];
 
   options.preconfs = {
@@ -27,7 +28,7 @@
         enable = lib.mkEnableOption "Whether to enable the X server (required for graphical desktop environments).";
       };
     };
-    bundle = {
+    pkgs = {
       core = {
         enable = lib.mkEnableOption "Whether to enable core packages.";
       };
@@ -39,6 +40,11 @@
       };
       games = {
         enable = lib.mkEnableOption "Whether to enable game packages.";
+      };
+      kernel = {
+        cachyos = {
+          enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and related configurations.";
+        };
       };
       media = {
         enable = lib.mkEnableOption "Whether to enable media packages.";
