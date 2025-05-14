@@ -43,7 +43,7 @@
       };
       kernel = {
         cachyos = {
-          enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and related configurations.";
+          enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and bpf scheduler.";
         };
       };
       media = {

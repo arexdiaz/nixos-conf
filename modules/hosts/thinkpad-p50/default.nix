@@ -1,18 +1,11 @@
-{ config, pkgs, lib, inputs, cRoot, ... }:
+{ inputs, cRoot, ... }:
 
-let
-  modules = [
-    "configs"
-    "users/rx"
-  ];
-
-  importModules = lib.map (path: "${cRoot}/modules/${path}") modules;
-in
 {
   imports = [
-    ./hardware-configuration.nix
     ./configuration.nix
+    ./hardware-configuration.nix
+    "${cRoot}/modules/configs"
+    "${cRoot}/modules/users/rx"
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p50
-  ] ++ importModules;
-  
+  ];
 }
