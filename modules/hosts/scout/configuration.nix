@@ -28,6 +28,14 @@
       media.enable                  = true;
       tools.enable                  = true;
       shell.fish.enable             = true;
+      virtualisation = {
+        enable = false;
+        virtualManager = {
+          enable = true;
+          libvirtdMembers = [ "rx" ];
+          virtioWinISO.enable = true;
+        };
+      };
       emulators = {
         enable                      = true;
         wine.enable                 = true;
