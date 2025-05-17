@@ -46,12 +46,12 @@ in
       };
 
       systemd.tmpfiles.rules = lib.mkIf (isoCfg.enable) [
-        "L+ ${symlinkPath} - - - - ${isoStorePath}" # Create or replace symlink
+        "L+ ${symlinkPath} - - - - ${isoStorePath}"
       ];
     })
     (lib.mkIf (!isoCfg.enable) {
       systemd.tmpfiles.rules = [
-        "R ${symlinkPath}" # Remove the symlink if it exists and isoCfg is disabled
+        "R ${symlinkPath}"
       ];
     })
   ];
