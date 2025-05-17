@@ -45,6 +45,11 @@
         cachyos = {
           enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and bpf scheduler.";
         };
+        patches = {
+          rdtsc = {
+            enable = lib.mkEnableOption "Placeholder bottom text.";
+          };
+        };
       };
       media = {
         enable = lib.mkEnableOption "Whether to enable media packages.";
