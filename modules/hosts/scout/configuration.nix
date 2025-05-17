@@ -19,17 +19,20 @@
 
   # local packages
   preconfs = {
-    desktop.environment.kde.enable  = true;
+    desktop.environment.kde.enable = true;
     pkgs = {
-      kernel.cachyos.enable         = true;
-      core.enable                   = true;
-      common.enable                 = true;
-      games.enable                  = true;
-      media.enable                  = true;
-      tools.enable                  = true;
-      shell.fish.enable             = true;
+      kernel = {
+        cachyos.enable = true;
+        patches.rdtsc.enable = true;
+      };
+      core.enable = true;
+      common.enable = true;
+      games.enable = true;
+      media.enable = true;
+      tools.enable = true;
+      shell.fish.enable = true;
       virtualisation = {
-        enable = false;
+        enable = true;
         virtualManager = {
           enable = true;
           libvirtdMembers = [ "rx" ];
@@ -37,24 +40,32 @@
         };
       };
       emulators = {
-        enable                      = true;
-        wine.enable                 = true;
+        enable = true;
+        wine.enable = true;
         gaming = {
-          lutris.enable             = true;
-          pcsx2.enable              = true;
+          lutris.enable = true;
+          pcsx2.enable = true;
         };
       };
     };
   };
 
+  services = {
+    plex = {
+      enable = true;
+      openFirewall  = true;
+      user = "rx";
+    };
+    # RDP Setup
+    xrdp = {
+      enable = true;
+      openFirewall = true;
+      defaultWindowManager = "startplasma-wayland";
+    };
+  };
+
   programs.nix-ld.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
-
-  services.plex = {
-    enable        = true;
-    openFirewall  = true;
-    user          = "rx";
-  };
 
   fileSystems = {
     "/mnt/Stuff" = {
