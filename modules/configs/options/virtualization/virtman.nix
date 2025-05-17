@@ -24,11 +24,8 @@ in
       programs.virt-manager.enable = true;
       users.groups.libvirtd.members = virtualManagerCfg.libvirtdMembers;
 
-      environment.systemPackages = with pkgs; [
-        virt-manager
-      ] ++ lib.optionals isoCfg.enable [
-        virtioWinISO
-      ];
+      environment.systemPackages = with pkgs;
+        lib.optionals isoCfg.enable [ virtioWinISO ];
 
       virtualisation.libvirtd = {
         enable = true;
