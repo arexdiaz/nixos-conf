@@ -50,6 +50,12 @@
             enable = lib.mkEnableOption "Placeholder bottom text.";
           };
         };
+        iommu = {
+          enable = lib.mkEnableOption "Whether to enable IOMMU kernel parameters.";
+          intel = lib.mkEnableOption "Add 'intel_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
+          amd = lib.mkEnableOption "Add 'amd_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
+          passthrough = lib.mkEnableOption "Add 'iommu=pt' to kernel parameters. Effective if IOMMU is enabled.";
+        };
       };
       media = {
         enable = lib.mkEnableOption "Whether to enable media packages.";
@@ -67,7 +73,10 @@
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
           phantomQemuPatch = {
-            enable = lib.mkEnableOption "Builds qemu kvm with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
+            enable = lib.mkEnableOption "Builds qemu with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
+          };
+          phantomEdk2Patch = {
+            enable = lib.mkEnableOption "Builds edk2 with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
           };
           libvirtdMembers = lib.mkOption {
             type = lib.types.listOf lib.types.str;

@@ -1,14 +1,14 @@
 final: prev:
 let
-    qemuVersion = "9.2.3";
+  qemuVersion = "9.2.3";
 
-    hyphantom = prev.fetchFromGitHub {
-      owner = "Scrut1ny";
-      repo = "Hypervisor-Phantom";
-      rev = "c1ded2dff0724e5f4c4a8a79cd8105eef0cd24d7";
-      sha256 = "sha256-uxfvNRCw/AZXYI7mH4fbzqohpQ9hMYIox8d75x6BLAc=";
-    };
-    patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
+  hyphantom = prev.fetchFromGitHub {
+    owner = "Scrut1ny";
+    repo = "Hypervisor-Phantom";
+    rev = "c1ded2dff0724e5f4c4a8a79cd8105eef0cd24d7";
+    sha256 = "sha256-uxfvNRCw/AZXYI7mH4fbzqohpQ9hMYIox8d75x6BLAc=";
+  };
+  patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
 in {
   qemu = prev.qemu.overrideAttrs (oldAttrs: rec {
 
@@ -20,12 +20,12 @@ in {
       sha256 = "sha256-uu1JQnDDYb9pgWrMhFEuPv7XHHoj92aRZCuAvD3naT4=";
     };
 
-    patches = (oldAttrs.patches or []) ++ [
+    patches = (oldAttrs.patches) ++ [
       "${patchDir}/QEMU/intel-qemu-9.2.3.patch"
       "${patchDir}/QEMU/qemu-9.2.3-libnfs6.patch"
     ];
 
-    nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
+    nativeBuildInputs = (oldAttrs.nativeBuildInputs) ++ [
       prev.coreutils
       prev.gnugrep
       prev.gnused
@@ -34,7 +34,7 @@ in {
       prev.bash
     ];
 
-    postPatch = (oldAttrs.postPatch or "") + ''
+    postPatch = (oldAttrs.postPatch) + ''
       readonly CPU_VENDOR="intel"
       readonly QEMU_VERSION="${qemuVersion}"
       readonly pm_type=1
