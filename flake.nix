@@ -20,9 +20,9 @@
       cRoot = ./.;
     in {
       nixosConfigurations = {
-        p50 = nixpkgs.lib.nixosSystem {
+        lvnpc = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "p50"; };
+          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "lvnpc"; };
           modules = [ ./modules/hosts/thinkpad-p50 ];
         };
 

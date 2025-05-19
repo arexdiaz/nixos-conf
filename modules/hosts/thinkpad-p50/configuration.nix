@@ -28,9 +28,9 @@
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
-      shell.fish.enable = true; # add a set default shell option
+      shell.fish.enable = true;
       virtualisation = {
-        enable = false;
+        enable = true;
         virtualManager = {
           enable = true;
           libvirtdMembers = [ "rx" ];
@@ -43,6 +43,6 @@
       };
     };
   };
-  
+
   system.stateVersion = "24.11";
 }
