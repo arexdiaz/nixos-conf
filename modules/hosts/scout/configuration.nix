@@ -24,6 +24,10 @@
       kernel = {
         cachyos.enable = true;
         patches.rdtsc.enable = true;
+        iommu = {
+          enable = true;
+          intel = true;
+        };
       };
       core.enable = true;
       common.enable = true;
@@ -36,6 +40,7 @@
         virtualManager = {
           enable = true;
           phantomQemuPatch.enable = true;
+          phantomEdk2Patch.enable = true;
           libvirtdMembers = [ "rx" ];
           virtioWinISO.enable = true;
         };
