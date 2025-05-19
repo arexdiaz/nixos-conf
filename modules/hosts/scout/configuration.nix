@@ -35,6 +35,7 @@
         enable = true;
         virtualManager = {
           enable = true;
+          phantomQemuPatch.enable = true;
           libvirtdMembers = [ "rx" ];
           virtioWinISO.enable = true;
         };
