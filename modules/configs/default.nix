@@ -6,8 +6,8 @@ let
 in
 {
   imports = [
-    ./options
     ./networking.nix
+    ./options
     ./services.nix
     ./system.nix
     inputs.home-manager.nixosModules.default

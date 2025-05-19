@@ -8,22 +8,13 @@
   };
 
   home = {
-    # Home Manager needs a bit of information about you and the paths it should
-    # manage.
     username = "rx";
     homeDirectory = "/home/rx";
 
-    # This value determines the Home Manager release that your configuration is
-    # compatible with. This helps avoid breakage when a new Home Manager release
-    # introduces backwards incompatible changes.
-    #
-    # You should not change this value, even if you update Home Manager. If you do
-    # want to update the value, then make sure to first check the Home Manager
-    # release notes.
-    stateVersion = "24.11"; # Please read the comment before changing.
+    sessionVariables = {
+      NH_OS_FLAKE = "/etc/nixos";
+    };
 
-    # The home.packages option allows you to install Nix packages into your
-    # environment.
     packages = [
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
@@ -93,6 +84,8 @@
     sessionVariables = {
       # EDITOR = "emacs";
     };
+
+    stateVersion = "24.11";
   };
 
   # Let Home Manager install and manage itself.
