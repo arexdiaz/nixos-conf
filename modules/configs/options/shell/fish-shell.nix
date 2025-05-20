@@ -26,6 +26,7 @@ lib.mkIf config.preconfs.pkgs.shell.fish.enable {
           ll = "eza -l";
           la = "eza -la";
           l = "eza -l";
+          nrs = "nh os switch";
         }
       ];
 

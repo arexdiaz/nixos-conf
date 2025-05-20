@@ -23,7 +23,7 @@
     pkgs = {
       kernel = {
         zen-patched.enable = true;
-        scx.enable = false;
+        scx.enable = true;
         iommu = {
           enable = true;
           intel = true;
