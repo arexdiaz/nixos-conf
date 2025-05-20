@@ -22,19 +22,19 @@
       nixosConfigurations = {
         lvnpc = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "lvnpc"; };
+          specialArgs = { inherit inputs; inherit cRoot; };
           modules = [ ./modules/hosts/thinkpad-p50 ];
         };
 
         scout = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "scout"; };
+          specialArgs = { inherit inputs; inherit cRoot; };
           modules = [ ./modules/hosts/scout ];
         };
 
         m1 = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit cRoot; flakeTarget = "m1"; };
+          specialArgs = { inherit inputs; inherit cRoot; };
           modules = [ ./hosts/apple-m1 ];
         };
       };

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, flakeTarget ? "default", ... }:
+{ config, pkgs, lib, ... }:
 
 lib.mkIf config.preconfs.pkgs.shell.fish.enable {
   environment.systemPackages = with pkgs; [
@@ -26,8 +26,6 @@ lib.mkIf config.preconfs.pkgs.shell.fish.enable {
           ll = "eza -l";
           la = "eza -la";
           l = "eza -l";
-          nxr = "sudo nixos-rebuild switch --flake /etc/nixos#${flakeTarget}";
-          nxu = "sudo nix flake update --flake /etc/nixos/";
         }
       ];
 
@@ -51,8 +49,10 @@ lib.mkIf config.preconfs.pkgs.shell.fish.enable {
             set alias_name (basename $dir)
             alias $alias_name=\"fish-dev $dir\"
         end
-        
+
         # ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+
+        set -gx NH_OS_FLAKE \"/etc/nixos\";
       ";
     };
 
