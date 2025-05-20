@@ -5,6 +5,6 @@
     ./cachyos.nix
     ./iommu.nix
     ./scheds.nix
-    ./zen
+    ./zen-patched.nix
   ];
 }
