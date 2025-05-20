@@ -22,8 +22,8 @@
     desktop.environment.kde.enable = true;
     pkgs = {
       kernel = {
-        cachyos.enable = true;
-        patches.rdtsc.enable = true;
+        zen-patched.enable = true;
+        scx.enable = false;
         iommu = {
           enable = true;
           intel = true;

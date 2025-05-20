@@ -7,7 +7,6 @@
     userEmail = "arexito@icloud.com";
   };
 
-
   home = {
     username = "rx";
     homeDirectory = "/home/rx";

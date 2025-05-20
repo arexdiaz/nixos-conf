@@ -45,6 +45,9 @@
         cachyos = {
           enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and bpf scheduler.";
         };
+        zen-patched = {
+          enable = lib.mkEnableOption "Placeholder bottomt text.";
+        };
         patches = {
           rdtsc = {
             enable = lib.mkEnableOption "Placeholder bottom text.";
