@@ -7,11 +7,5 @@
 
   config = lib.mkIf config.preconfs.pkgs.kernel.cachyos.enable {
     boot.kernelPackages = pkgs.linuxPackages_cachyos; # https://github.com/CachyOS/linux-cachyos
-
-    services.scx = {
-      package = pkgs.scx_git.full;
-      scheduler = "scx_bpfland";
-      enable = true;
-    };
   };
 }
