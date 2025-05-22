@@ -75,11 +75,11 @@
         enable = lib.mkEnableOption "Whether to enable virtualization packages.";
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
-          phantomQemuPatch = {
+          QemuPatch = {
             enable = lib.mkEnableOption "Builds qemu with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
           };
-          phantomEdk2Patch = {
-            enable = lib.mkEnableOption "Builds edk2 with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
+          OvmfPatch = {
+            enable = lib.mkEnableOption "Builds ovmf with https://github.com/Scrut1ny/Hypervisor-Phantom patches.";
           };
           libvirtdMembers = lib.mkOption {
             type = lib.types.listOf lib.types.str;

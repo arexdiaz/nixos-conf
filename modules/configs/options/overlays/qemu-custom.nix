@@ -5,14 +5,14 @@ let
   hyphantom = prev.fetchFromGitHub {
     owner = "Scrut1ny";
     repo = "Hypervisor-Phantom";
-    rev = "c1ded2dff0724e5f4c4a8a79cd8105eef0cd24d7";
-    sha256 = "sha256-uxfvNRCw/AZXYI7mH4fbzqohpQ9hMYIox8d75x6BLAc=";
+    rev = "a783d3f74d69c6d9cb220b7e8ca211e010e9987b";
+    sha256 = "sha256-XT6t6FhIjwQtou2RSufotCiV9d+gmNDiCqE0n2nK4ks=";
   };
   patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
 in {
   qemu = prev.qemu.overrideAttrs (oldAttrs: rec {
 
-    pname = "${oldAttrs.pname}-patched";
+    pname = "${oldAttrs.pname}";
     version = "${qemuVersion}";
 
     src = prev.fetchurl {

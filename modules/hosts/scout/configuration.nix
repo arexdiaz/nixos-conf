@@ -8,14 +8,20 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia = {
-      open    = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      open    = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      modesetting.enable = true;
     };
     graphics = {
       enable        = true;
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
+
+  boot.kernelParams = [
+    "vfio-pci.ids=10de:2489,10de:228b,1b21:0612"
+    "video=efifb:off"
+  ];
 
   # local packages
   preconfs = {
@@ -27,6 +33,7 @@
         iommu = {
           enable = true;
           intel = true;
+          passthrough = true;
         };
       };
       core.enable = true;
@@ -39,8 +46,8 @@
         enable = true;
         virtualManager = {
           enable = true;
-          phantomQemuPatch.enable = true;
-          phantomEdk2Patch.enable = true;
+          QemuPatch.enable = false;
+          OvmfPatch.enable = false;
           libvirtdMembers = [ "rx" ];
           virtioWinISO.enable = true;
         };
@@ -58,13 +65,13 @@
 
   services = {
     plex = {
-      enable = true;
+      enable = false;
       openFirewall  = true;
       user = "rx";
     };
     # RDP Setup
     xrdp = {
-      enable = true;
+      enable = false;
       openFirewall = true;
       defaultWindowManager = "startplasma-wayland";
     };
