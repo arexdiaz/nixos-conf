@@ -28,7 +28,8 @@
     desktop.environment.kde.enable = true;
     pkgs = {
       kernel = {
-        zen-patched.enable = true;
+        # zen-patched.enable = true;
+        cachyos.enable = true;
         scx.enable = true;
         iommu = {
           enable = true;
@@ -46,8 +47,8 @@
         enable = true;
         virtualManager = {
           enable = true;
-          QemuPatch.enable = false;
-          OvmfPatch.enable = false;
+          QemuPatch.enable = true;
+          OvmfPatch.enable = true;
           libvirtdMembers = [ "rx" ];
           virtioWinISO.enable = true;
         };
