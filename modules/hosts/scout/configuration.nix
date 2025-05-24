@@ -28,8 +28,7 @@
     desktop.environment.kde.enable = true;
     pkgs = {
       kernel = {
-        # zen-patched.enable = true;
-        cachyos.enable = true;
+        zen-patched.enable = true;
         scx.enable = true;
         iommu = {
           enable = true;
@@ -66,11 +65,11 @@
 
   services = {
     plex = {
-      enable = false;
+      enable = true;
       openFirewall  = true;
       user = "rx";
     };
-    # RDP Setup
+
     xrdp = {
       enable = false;
       openFirewall = true;

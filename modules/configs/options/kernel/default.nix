@@ -3,8 +3,8 @@
 {
   imports = [
     ./cachyos.nix
-    ./iommu.nix
-    ./scheds.nix
-    ./zen-patched.nix
+    ./options/iommu.nix
+    ./options/scheds.nix
+    ./zen-rdtsc.nix
   ];
 }
