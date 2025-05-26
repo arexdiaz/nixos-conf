@@ -1,12 +1,12 @@
 final: prev:
 let
-  qemuVersion = "9.2.3";
+  qemuVersion = "10.0.0";
 
   hyphantom = prev.fetchFromGitHub {
     owner = "Scrut1ny";
     repo = "Hypervisor-Phantom";
-    rev = "a783d3f74d69c6d9cb220b7e8ca211e010e9987b";
-    sha256 = "sha256-XT6t6FhIjwQtou2RSufotCiV9d+gmNDiCqE0n2nK4ks=";
+    rev = "18e67df0791c5c912d3eacab1ba8f2edd83fa43f";
+    sha256 = "sha256-nHIzcb7qCQlD2v8Rwx4uL18fPDepw5ly94DNiyv/ZkY=";
   };
   patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
 in {
@@ -17,12 +17,12 @@ in {
 
     src = prev.fetchurl {
       url = "https://download.qemu.org/qemu-${qemuVersion}.tar.xz";
-      sha256 = "sha256-uu1JQnDDYb9pgWrMhFEuPv7XHHoj92aRZCuAvD3naT4=";
+      sha256 = "sha256-IsB1YB/c+MeyZxqDnr3O8dTylz62c1JU/S4b0PMLOJY=";
     };
 
     patches = (oldAttrs.patches) ++ [
-      "${patchDir}/QEMU/intel-qemu-9.2.3.patch"
-      "${patchDir}/QEMU/qemu-9.2.3-libnfs6.patch"
+      "${patchDir}/QEMU/intel-qemu-${qemuVersion}.patch"
+      "${patchDir}/QEMU/qemu-${qemuVersion}-libnfs6.patch"
     ];
 
     nativeBuildInputs = (oldAttrs.nativeBuildInputs) ++ [
@@ -46,8 +46,7 @@ in {
         local patterns=("STRING_SERIALNUMBER" "STR_SERIALNUMBER" "STR_SERIAL_MOUSE" "STR_SERIAL_TABLET" "STR_SERIAL_KEYBOARD" "STR_SERIAL_COMPAT")
         local regex_pattern="($(IFS=\|; echo "''${patterns[*]}"))"
 
-        # We are already in the source root, so "hw/usb" is a relative path.
-        find hw/usb -type f -exec grep -lE "\[$regex_pattern\]" {} + | while read -r file; do
+        find "$(pwd)/hw/usb" -type f -exec grep -lE "\[$regex_pattern\]" {} + | while read -r file; do
           tmpfile=$(mktemp)
 
           while IFS= read -r line; do
@@ -110,17 +109,15 @@ in {
           "Samsung SSD 850 PRO 1TB" "Samsung SSD T7 Touch 1TB"
           "Samsung SSD 840 EVO 1TB" "WD Blue SN570 NVMe SSD 1TB"
           "WD Black SN850 NVMe SSD 1TB" "WD Green 1TB SSD"
-          "WD My Passport SSD 1TB" "WD Blue 3D NAND 1TB SSD"
+          "WD Blue 3D NAND 1TB SSD" "Crucial P3 1TB PCIe 3.0 3D NAND NVMe SSD"
           "Seagate BarraCuda SSD 1TB" "Seagate FireCuda 520 SSD 1TB"
-          "Seagate One Touch SSD 1TB" "Seagate IronWolf 110 SSD 1TB"
+          "Seagate IronWolf 110 SSD 1TB" "SanDisk Ultra 3D NAND SSD 1TB"
           "Seagate Fast SSD 1TB" "Crucial MX500 1TB 3D NAND SSD"
           "Crucial P5 Plus NVMe SSD 1TB" "Crucial BX500 1TB 3D NAND SSD"
-          "Crucial X8 Portable SSD 1TB" "Crucial P3 1TB PCIe 3.0 3D NAND NVMe SSD"
+          "Crucial P3 1TB PCIe 3.0 3D NAND NVMe SSD"
           "Kingston A2000 NVMe SSD 1TB" "Kingston KC2500 NVMe SSD 1TB"
           "Kingston A400 SSD 1TB" "Kingston HyperX Savage SSD 1TB"
-          "Kingston DataTraveler Vault Privacy 3.0 1TB" "SanDisk Ultra 3D NAND SSD 1TB"
-          "SanDisk Extreme Portable SSD V2 1TB" "SanDisk SSD PLUS 1TB"
-          "SanDisk Ultra 3D 1TB NAND SSD" "SanDisk Extreme Pro 1TB NVMe SSD"
+          "SanDisk SSD PLUS 1TB" "SanDisk Ultra 3D 1TB NAND SSD"
         )
 
         get_random_element() {
@@ -139,9 +136,10 @@ in {
 
       }
 
-      spoof_acpi_table_strings() {
+      spoof_acpi_table_data() {
+        # Spoofs 'OEM ID' and 'OEM Table ID' for ACPI tables.
 
-        local pairs=(
+        local oem_pairs=(
           'DELL  ' 'Dell Inc' ' ASUS ' 'Notebook'
           'MSI NB' 'MEGABOOK' 'LENOVO' 'TC-O5Z  '
           'LENOVO' 'CB-01   ' 'SECCSD' 'LH43STAR'
@@ -149,35 +147,41 @@ in {
         )
 
         if [[ "$CPU_VENDOR" == "amd" ]]; then
-          pairs+=('ALASKA' 'A M I ')
+          oem_pairs+=('ALASKA' 'A M I ')
         elif [[ "$CPU_VENDOR" == "intel" ]]; then
-          pairs+=('INTEL ' 'U Rvp   ')
+          oem_pairs+=('INTEL ' 'U Rvp   ')
         fi
 
-        local total_pairs=$(( ''${#pairs[@]} / 2 ))
-        local random_index=$(( RANDOM % total_pairs * 2 ))
-        local appname6=''${pairs[$random_index]}
-        local appname8=''${pairs[$random_index + 1]}
+        local total_pairs=$(( ''${#oem_pairs[@]} / 2 ))
+        local random_index=''$(( RANDOM % total_pairs * 2 ))
+        local appname6=''${oem_pairs[''$random_index]}
+        local appname8=''${oem_pairs[''$random_index + 1]}
         local h_file="$(pwd)/include/hw/acpi/aml-build.h"
 
         sed -i "$h_file" -e "s/^#define ACPI_BUILD_APPNAME6 \".*\"/#define ACPI_BUILD_APPNAME6 \"''${appname6}\"/"
         sed -i "$h_file" -e "s/^#define ACPI_BUILD_APPNAME8 \".*\"/#define ACPI_BUILD_APPNAME8 \"''${appname8}\"/"
 
-        # By default QEMU doesn't specify PM type in FACP ACPI table.
-        # Normally vendors specify either 1 (Desktop) or 2 (Mobile)
-        # We patch PM type integer based on dmidecode's chassis-type
+        # Default QEMU has an unspecified PM type in the FACP ACPI table.
+        # On baremetal normally vendors specify either 1 (Desktop) or 2 (Notebook).
+        # We patch the PM type integer based on the chassis type output from dmidecode.
 
-        local file="$(pwd)/hw/acpi/aml-build.c"
-        local pm_orig="build_append_int_noprefix(tbl, 0 \/\* Unspecified \*\/, 1);"
-        local pm_replacement="build_append_int_noprefix(tbl, $pm_type \/\* $chassis_type \*\/, 1);"
-        sed -i "$file" -e "s|$pm_orig|$pm_replacement|"
+        echo "Obtaining machine's chassis-type..."
+
+        local c_file="$(pwd)/hw/acpi/aml-build.c"
+        # local pm_type="1" # Desktop
+        # local chassis_type=$(sudo dmidecode --string chassis-type)
+
+
+        sed -i 's/build_append_int_noprefix(tbl, 0 \/\* Unspecified \*\//build_append_int_noprefix(tbl, '"$pm_type"' \/\* '"$chassis_type"' \*\//g' "$c_file"
       }
 
       spoof_processor_manufacturer() {
+
         local chipset_file
         case "$QEMU_VERSION" in
           "8.2.6") chipset_file="$(pwd)/hw/i386/pc_q35.c" ;;
-          "9.2.3") chipset_file="$(pwd)/hw/i386/fw_cfg.c" ;;
+          "9.2.3"|"10.0.0") chipset_file="$(pwd)/hw/i386/fw_cfg.c" ;;
+          *) echo "Unsupported QEMU version: $QEMU_VERSION" ;;
         esac
 
         local manufacturer=$(dmidecode --string processor-manufacturer)
@@ -186,7 +190,7 @@ in {
 
       spoof_serial_numbers
       spoof_drive_serial_number
-      spoof_acpi_table_strings
+      spoof_acpi_table_data
       spoof_processor_manufacturer
     '';
   });

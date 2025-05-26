@@ -8,11 +8,11 @@ let
     sha256 = "0qrx0c8bza9jj84ax209h3b9w2yn2sh122qj9ki77c8wgp6rwvrm";
     isLqx = false;
   };
-  rdtsc-patch = pkgs.fetchFromGitHub {
-    owner = "YungBinary";
-    repo = "RDTSC-KVM-Handler-v2";
-    rev = "1d01edc6fab44ca2eb8db2eea95abcb29e818ef8";
-    sha256 = "sha256-7UWG+QgYaa/m0qyehSh+QO0WE6ZlW2hqqvaBJ3Pxqpo=";
+  hyphantom = pkgs.fetchFromGitHub {
+    owner = "Scrut1ny";
+    repo = "Hypervisor-Phantom";
+    rev = "18e67df0791c5c912d3eacab1ba8f2edd83fa43f";
+    sha256 = "sha256-nHIzcb7qCQlD2v8Rwx4uL18fPDepw5ly94DNiyv/ZkY=";
   };
   zenKernelsFor = { version, suffix, sha256, isLqx }: pkgs.buildLinux ({
     inherit version;
@@ -70,7 +70,7 @@ in
       kernelPackages = pkgs.linuxPackagesFor (zenKernelsFor zen);
       kernelPatches = [{
         name = "vmx-rdtsc-patch";
-        patch = "${rdtsc-patch}/kernel-patch-6.8.0-49.patch";
+        patch = "${hyphantom}/Hypervisor-Phantom/patches/Kernel/zen-kernel-6.14-latest-vmx.mypatch";
       }];
     };
   };

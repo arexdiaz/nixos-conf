@@ -1,12 +1,12 @@
 final: prev:
 let
-  edk2Version = "202502";
+  edk2Version = "202505";
 
   patchDir = "${prev.fetchFromGitHub {
     owner = "Scrut1ny";
     repo = "Hypervisor-Phantom";
-    rev = "c1ded2dff0724e5f4c4a8a79cd8105eef0cd24d7";
-    sha256 = "sha256-uxfvNRCw/AZXYI7mH4fbzqohpQ9hMYIox8d75x6BLAc=";
+    rev = "18e67df0791c5c912d3eacab1ba8f2edd83fa43f";
+    sha256 = "sha256-nHIzcb7qCQlD2v8Rwx4uL18fPDepw5ly94DNiyv/ZkY=";
   }}/Hypervisor-Phantom/patches/";
 
   pythonEnv = prev.buildPackages.python3.withPackages (ps: [ ps.tkinter ]);
@@ -40,11 +40,11 @@ let
                 repo = "edk2";
                 rev = "edk2-stable${edk2Version}";
                 fetchSubmodules = true;
-                sha256 = "sha256-iobC0CeWSylS9sLuXOqAmL36hl/tY+IedT/I3xQ80Ag=";
+                sha256 = "sha256-VuiEqVpG/k7pfy0cOC6XmY+8NBtU/OHdDB9Y52tyNe8=";
               };
 
               patches = (oldApplyPatchesAttrs.patches or []) ++ [
-                "${patchDir}/EDK2/intel-edk2-stable202502.patch"
+                "${patchDir}/EDK2/intel-edk2-stable${edk2Version}.patch"
               ];
 
               postPatch = '' # openssl_3 gave me a huge migrane
