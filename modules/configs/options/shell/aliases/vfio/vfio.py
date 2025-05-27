@@ -63,9 +63,7 @@ if __name__ == '__main__':
     [cyan]--list[/cyan]     List PCI devices and their driver info
     [cyan]--switch[/cyan]   Switch kernel driver for all devices
     """
-    if len(args) == 0:
-        console.print(usage)
-        sys.exit()
+
     if args[0] == "--list":
         getDevices()
     elif args[0] == "--switch":
