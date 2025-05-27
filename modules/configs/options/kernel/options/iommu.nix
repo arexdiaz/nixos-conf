@@ -5,23 +5,27 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    boot.kernelParams =
-      (lib.optionals cfg.intel [ "intel_iommu=on" ]) ++
-      (lib.optionals cfg.amd [ "amd_iommu=on" ]) ++
-      (lib.optionals cfg.passthrough [ "iommu=pt" ]);
+    boot = {
+      kernelParams =
+        (lib.optionals cfg.intel [ "intel_iommu=on" ]) ++
+        (lib.optionals cfg.amd [ "amd_iommu=on" ]) ++
+        (lib.optionals cfg.passthrough [ "iommu=pt" ]) ++ [
+          "vfio-pci.ids=${cfg.vfio_devs}"
+          "video=efifb:off"
+        ];
+      
+      kernelModules = [
+        "vfio"
+        "vfio_pci"
+        "vfio_iommu_type1"
+        "vfio_virqfd"
+      ];
 
-    boot.kernelModules = [
-      "vfio"
-      "vfio_pci"
-      "vfio_iommu_type1"
-      "vfio_virqfd"
-    ];
-
-    boot.initrd.kernelModules = [
-      "vfio"
-      "vfio_pci"
-      "vfio_iommu_type1"
-    ];
-
+      initrd.kernelModules = [
+        "vfio"
+        "vfio_pci"
+        "vfio_iommu_type1"
+      ];
+    };
   };
 }

@@ -14,6 +14,7 @@
     ./shell/fish-shell.nix
     ./virtualization/docker.nix
     ./virtualization/virtman.nix
+    ./shell/aliases/vfio
   ];
 
   options.preconfs = {
@@ -58,6 +59,11 @@
           intel = lib.mkEnableOption "Add 'intel_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
           amd = lib.mkEnableOption "Add 'amd_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
           passthrough = lib.mkEnableOption "Add 'iommu=pt' to kernel parameters. Effective if IOMMU is enabled.";
+          vfio_devs = lib.mkOption {
+            type = lib.types.str;
+            default = "";
+            description = "Placeholder.";
+          };
         };
       };
       media = {

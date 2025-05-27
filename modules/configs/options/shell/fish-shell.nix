@@ -20,16 +20,14 @@ lib.mkIf config.preconfs.pkgs.shell.fish.enable {
         completions.enable = true;
       };
 
-      shellAliases = lib.mkMerge [
-        {
-          ls = "eza";
-          ll = "eza -l";
-          la = "eza -la";
-          l = "eza -l";
-          nrs = "nh os switch";
-          nca = "nh clean all -a";
-        }
-      ];
+      shellAliases = lib.mkMerge [{
+        ls = "eza";
+        ll = "eza -l";
+        la = "eza -la";
+        l = "eza -l";
+        nrs = "nh os switch";
+        nca = "nh clean all -a";
+      }];
 
       interactiveShellInit = "
         function nxc-toggle

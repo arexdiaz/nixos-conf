@@ -18,11 +18,6 @@
     };
   };
 
-  boot.kernelParams = [
-    "vfio-pci.ids=10de:2489,10de:228b,1b21:0612"
-    "video=efifb:off"
-  ];
-
   # local packages
   preconfs = {
     desktop.environment.kde.enable = true;
@@ -34,6 +29,7 @@
           enable = true;
           intel = true;
           passthrough = true;
+          vfio_devs="10de:2489,10de:228b,1b21:0612,8086:43f0";
         };
       };
       core.enable = true;
