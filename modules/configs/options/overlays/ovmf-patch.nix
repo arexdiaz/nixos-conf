@@ -76,6 +76,8 @@ let
                 substituteInPlace BaseTools/Conf/tools_def.template --replace-fail \
                   'DEFINE CLANGPDB_WARNING_OVERRIDES    = ' \
                   'DEFINE CLANGPDB_WARNING_OVERRIDES    = -Wno-unneeded-internal-declaration '
+
+                cp -f "${patchDir}/EDK2/Logo.bmp" "MdeModulePkg/Logo/Logo.bmp"
               '';
             });
 
