@@ -13,7 +13,7 @@
           '';
 
         shellAliases = lib.mkMerge [{
-          vfio = "PATH=export PATH=${pkgs.pciutils}/bin:$PATH ${(pkgs.python313.withPackages (ps: with ps; [ rich ]))}/bin/python ${./vfio.py}";
+          vfio = "PATH=${pkgs.pciutils}/bin:$PATH ${(pkgs.python313.withPackages (ps: with ps; [ rich ]))}/bin/python ${./vfio.py}";
         }];
       };
     };

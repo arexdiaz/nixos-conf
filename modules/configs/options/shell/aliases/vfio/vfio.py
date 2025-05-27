@@ -52,7 +52,7 @@ def switchKernel(dev):
     driver = "vfio-pci" if dev.get('mode') == 'host' else dev.get('def_driver')
     pci = f"0000:{dev.get('pci')}"
     ids = f"{dev['vendor']} {dev['device']}"
-    bind = run(f'echo {pci} | sudo tee /sys/bus/pci/devices/{pci}/driver/unbind')
+    unbind = run(f'echo {pci} | sudo tee /sys/bus/pci/devices/{pci}/driver/unbind')
     register = run(f'echo {ids} | sudo tee /sys/bus/pci/drivers/{driver}/new_id')
     bind = run(f'echo {pci} | sudo tee /sys/bus/pci/drivers/{driver}/bind')
     console.print(f"{dev['name']} changed to [bold]{'[green]vfio[/green]' if dev.get('mode') == 'host' else '[red]host[/red]'}[/bold]")
