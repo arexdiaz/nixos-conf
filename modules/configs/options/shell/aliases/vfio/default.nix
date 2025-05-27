@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  config = lib.mkIf config.preconfs.pkgs.kernel.iommu.enable {
+  config = lib.mkIf config.preconfs.system.kernel.iommu.enable {
     programs = {
       fish = {
         interactiveShellInit = ''

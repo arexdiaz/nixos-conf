@@ -65,7 +65,7 @@ let
   });
 in
 {
-  config = lib.mkIf config.preconfs.pkgs.kernel.zen-patched.enable {
+  config = lib.mkIf config.preconfs.system.kernel.zen-patched.enable {
     boot = {
       kernelPackages = pkgs.linuxPackagesFor (zenKernelsFor zen);
       kernelPatches = [{

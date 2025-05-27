@@ -18,17 +18,6 @@
   ];
 
   options.preconfs = {
-    desktop.environment = {
-      kde = {
-        enable = lib.mkEnableOption "Whether to enable and configure the KDE Plasma desktop environment.";
-      };
-      gnome = {
-        enable = lib.mkEnableOption "Whether to enable and configure the GNOME desktop environment.";
-      };
-      xserver = {
-        enable = lib.mkEnableOption "Whether to enable the X server (required for graphical desktop environments).";
-      };
-    };
     pkgs = {
       core = {
         enable = lib.mkEnableOption "Whether to enable core packages.";
@@ -41,6 +30,25 @@
       };
       games = {
         enable = lib.mkEnableOption "Whether to enable game packages.";
+      };
+      media = {
+        enable = lib.mkEnableOption "Whether to enable media packages.";
+      };
+      tools = {
+        enable = lib.mkEnableOption "Whether to enable tool packages.";
+      };
+    };
+    system = {
+      desktop.environment = {
+        kde = {
+          enable = lib.mkEnableOption "Whether to enable and configure the KDE Plasma desktop environment.";
+        };
+        gnome = {
+          enable = lib.mkEnableOption "Whether to enable and configure the GNOME desktop environment.";
+        };
+        xserver = {
+          enable = lib.mkEnableOption "Whether to enable the X server (required for graphical desktop environments).";
+        };
       };
       kernel = {
         cachyos = {
@@ -66,18 +74,12 @@
           };
         };
       };
-      media = {
-        enable = lib.mkEnableOption "Whether to enable media packages.";
-      };
-      tools = {
-        enable = lib.mkEnableOption "Whether to enable tool packages.";
-      };
       shell = {
         fish = {
-            enable = lib.mkEnableOption "Whether to enable fish shell.";
+          enable = lib.mkEnableOption "Whether to enable fish shell.";
         };
       };
-      virtualisation = {
+      virtualization = {
         enable = lib.mkEnableOption "Whether to enable virtualization packages.";
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
@@ -110,6 +112,6 @@
 
   config = {
     # Enable the X server if the corresponding option is set
-    services.xserver.enable = config.preconfs.desktop.environment.xserver.enable;
+    services.xserver.enable = config.preconfs.system.desktop.environment.xserver.enable;
   };
 }

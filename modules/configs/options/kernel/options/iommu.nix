@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.preconfs.pkgs.kernel.iommu;
+  cfg = config.preconfs.system.kernel.iommu;
 in
 {
   config = lib.mkIf cfg.enable {

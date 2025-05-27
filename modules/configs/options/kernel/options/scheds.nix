@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  options.preconfs.pkgs.kernel.scx = {
+  options.preconfs.system.kernel.scx = {
     enable = lib.mkEnableOption "Whether to enable bpf scheduler.";
     scheduler = lib.mkOption {
       type = lib.types.str;
@@ -13,10 +13,10 @@
     };
   };
 
-  config = lib.mkIf config.preconfs.pkgs.kernel.scx.enable {
+  config = lib.mkIf config.preconfs.system.kernel.scx.enable {
     services.scx = {
       package = pkgs.scx_git.full;
-      scheduler = config.preconfs.pkgs.kernel.scx.scheduler;
+      scheduler = config.preconfs.system.kernel.scx.scheduler;
       enable = true;
     };
   };

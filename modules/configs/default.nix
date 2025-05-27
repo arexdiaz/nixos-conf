@@ -1,8 +1,8 @@
 { config, inputs, lib, ... }:
 let
   confs = config.preconfs;
-  qemu-patch = confs.pkgs.virtualisation.virtualManager.QemuPatch;
-  ovmf-patch = confs.pkgs.virtualisation.virtualManager.OvmfPatch;
+  qemu-patch = confs.system.virtualization.virtualManager.QemuPatch;
+  ovmf-patch = confs.system.virtualization.virtualManager.OvmfPatch;
 in
 {
   imports = [

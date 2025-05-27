@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-lib.mkIf config.preconfs.pkgs.shell.fish.enable {
+lib.mkIf config.preconfs.system.shell.fish.enable {
   environment.systemPackages = with pkgs; [
     fishPlugins.done
     fishPlugins.fzf

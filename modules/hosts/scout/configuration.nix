@@ -20,8 +20,8 @@
 
   # local packages
   preconfs = {
-    desktop.environment.kde.enable = true;
-    pkgs = {
+    system = {
+      desktop.environment.kde.enable = true;
       kernel = {
         zen-patched.enable = true;
         scx.enable = true;
@@ -32,13 +32,8 @@
           vfio_devs="10de:2489,10de:228b,1b21:0612,8086:43f0";
         };
       };
-      core.enable = true;
-      common.enable = true;
-      games.enable = true;
-      media.enable = true;
-      tools.enable = true;
       shell.fish.enable = true;
-      virtualisation = {
+      virtualization = {
         enable = true;
         virtualManager = {
           enable = true;
@@ -48,6 +43,13 @@
           virtioWinISO.enable = true;
         };
       };
+    };
+    pkgs = {
+      core.enable = true;
+      common.enable = true;
+      games.enable = true;
+      media.enable = true;
+      tools.enable = true;
       emulators = {
         enable = true;
         wine.enable = true;

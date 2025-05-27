@@ -20,7 +20,7 @@
 
   # local packages
   preconfs = {
-    desktop.environment.kde.enable = true;
+    system.desktop.environment.kde.enable = true;
     pkgs = {
       kernel.cachyos.enable = true;
       core.enable = true;
