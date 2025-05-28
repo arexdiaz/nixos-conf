@@ -20,6 +20,21 @@
 
   # local packages
   preconfs = {
+    pkgs = {
+      core.enable = true;
+      common.enable = true;
+      games.enable = true;
+      media.enable = true;
+      tools.enable = true;
+      emulators = {
+        enable = true;
+        wine.enable = true;
+        gaming = {
+          lutris.enable = true;
+          pcsx2.enable = true;
+        };
+      };
+    };
     system = {
       desktop.environment.kde.enable = true;
       kernel = {
@@ -44,21 +59,6 @@
         };
       };
     };
-    pkgs = {
-      core.enable = true;
-      common.enable = true;
-      games.enable = true;
-      media.enable = true;
-      tools.enable = true;
-      emulators = {
-        enable = true;
-        wine.enable = true;
-        gaming = {
-          lutris.enable = true;
-          pcsx2.enable = true;
-        };
-      };
-    };
   };
 
   services = {
@@ -75,6 +75,43 @@
     };
   };
 
+  services.xserver = {
+
+    extraConfig = ''
+      Section "ServerLayout"
+          Identifier "layout"
+          Screen 0 "nvidia-primary"
+          Inactive "nvidia-offload"
+      EndSection
+
+      Section "Device"
+          Identifier "nvidia-primary"
+          Driver "nvidia"
+          BusID "PCI:1:0:0"
+          Option "AllowEmptyInitialConfiguration" "on"
+          Option "Coolbits" "28"
+      EndSection
+
+      Section "Screen"
+          Identifier "nvidia-primary"
+          Device "nvidia-primary"
+      EndSection
+
+      Section "Device"
+          Identifier "nvidia-offload"
+          Driver "nvidia"
+          BusID "PCI:2:0:0"
+          Option "AllowEmptyInitialConfiguration" "on"
+          Option "ProbeAllGpus" "false"
+      EndSection
+
+      Section "Screen"
+          Identifier "nvidia-offload"
+          Device "nvidia-offload"
+      EndSection
+    '';
+  };
+
   programs.nix-ld.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -84,9 +121,10 @@
       fsType  = "ext4";
       options = [ "users" "nofail" "exec" ];
     };
+
     "/mnt/Stuff2" = {
-      device  = "/dev/disk/by-uuid/CA33-738B";
-      fsType  = "vfat";
+      device  = "/dev/disk/by-uuid/7bb68649-8e30-4cfc-846c-4da6f520fe1a";
+      fsType  = "ext4";
       options = [ "users" "nofail" "exec" ];
     };
   };

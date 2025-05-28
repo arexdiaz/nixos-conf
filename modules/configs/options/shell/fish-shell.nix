@@ -26,6 +26,7 @@ lib.mkIf config.preconfs.system.shell.fish.enable {
         la = "eza -la";
         l = "eza -l";
         nrs = "nh os switch";
+        nrt = "nh os test";
         nca = "nh clean all -a";
       }];
 
