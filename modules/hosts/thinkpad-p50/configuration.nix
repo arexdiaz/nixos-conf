@@ -20,16 +20,21 @@
 
   # local packages
   preconfs = {
-    system.desktop.environment.kde.enable = true;
     pkgs = {
-      kernel.cachyos.enable = true;
       core.enable = true;
       common.enable = true;
       games.enable  = true;
       media.enable  = true;
       tools.enable  = true;
+    };
+    system = {
+      desktop.environment.kde.enable = true;
+      kernel = {
+        cachyos.enable = false;
+        scx.enable = true;
+      };
       shell.fish.enable = true;
-      virtualisation = {
+      virtualization = {
         enable = true;
         virtualManager = {
           enable = true;
