@@ -8,8 +8,8 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia = {
-      open    = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      open    = true;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
       modesetting.enable = true;
     };
     graphics = {
@@ -38,7 +38,10 @@
     system = {
       desktop.environment.kde.enable = true;
       kernel = {
-        zen-patched.enable = true;
+        zen = {
+          enable = true;
+          patch.rdtsc.enable = true;
+        };
         scx.enable = true;
         iommu = {
           enable = true;
@@ -73,43 +76,6 @@
       openFirewall = true;
       defaultWindowManager = "startplasma-wayland";
     };
-  };
-
-  services.xserver = {
-
-    extraConfig = ''
-      Section "ServerLayout"
-          Identifier "layout"
-          Screen 0 "nvidia-primary"
-          Inactive "nvidia-offload"
-      EndSection
-
-      Section "Device"
-          Identifier "nvidia-primary"
-          Driver "nvidia"
-          BusID "PCI:1:0:0"
-          Option "AllowEmptyInitialConfiguration" "on"
-          Option "Coolbits" "28"
-      EndSection
-
-      Section "Screen"
-          Identifier "nvidia-primary"
-          Device "nvidia-primary"
-      EndSection
-
-      Section "Device"
-          Identifier "nvidia-offload"
-          Driver "nvidia"
-          BusID "PCI:2:0:0"
-          Option "AllowEmptyInitialConfiguration" "on"
-          Option "ProbeAllGpus" "false"
-      EndSection
-
-      Section "Screen"
-          Identifier "nvidia-offload"
-          Device "nvidia-offload"
-      EndSection
-    '';
   };
 
   programs.nix-ld.enable = true;

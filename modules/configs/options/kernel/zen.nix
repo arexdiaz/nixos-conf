@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  cfgZen = config.preconfs.system.kernel.zen;
   mkKernelOverride = lib.mkOverride 90;
   zen = {
     version = "6.14.6";
@@ -65,13 +66,20 @@ let
   });
 in
 {
-  config = lib.mkIf config.preconfs.system.kernel.zen-patched.enable {
-    boot = {
-      kernelPackages = pkgs.linuxPackagesFor (zenKernelsFor zen);
-      kernelPatches = [{
-        name = "vmx-rdtsc-patch";
-        patch = "${hyphantom}/Hypervisor-Phantom/patches/Kernel/zen-kernel-6.14-latest-vmx.mypatch";
-      }];
-    };
+  config = lib.mkIf cfgZen.enable {
+    boot =
+      if cfgZen.patch.rdtsc.enable then {
+        kernelPackages = pkgs.linuxPackagesFor (zenKernelsFor zen);
+        kernelPatches = [{
+          name = "vmx-rdtsc-patch";
+          patch = "${hyphantom}/Hypervisor-Phantom/patches/Kernel/zen-kernel-6.14-latest-vmx.mypatch";
+        }
+        {
+          name = "rc6-patch";
+          patch = ./rc6v2.patch;
+        }];
+      } else {
+        kernelPackages = pkgs.linuxPackagesFor pkgs.linuxKernel.kernels.linux_zen;
+      };
   };
 }

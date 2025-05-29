@@ -10,7 +10,7 @@ in
         (lib.optionals cfg.intel [ "intel_iommu=on" ]) ++
         (lib.optionals cfg.amd [ "amd_iommu=on" ]) ++
         (lib.optionals cfg.passthrough [ "iommu=pt" ]) ++ [
-          "vfio-pci.ids=${cfg.vfio_devs}"
+          "vfio-pci.ids=${cfg.vfio.devices}"
           "video=efifb:off"
         ];
       

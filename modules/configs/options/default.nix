@@ -54,23 +54,22 @@
         cachyos = {
           enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and bpf scheduler.";
         };
-        zen-patched = {
+        zen = {
           enable = lib.mkEnableOption "Placeholder bottomt text.";
+          patch.rdtsc.enable = lib.mkEnableOption "Enable RDTSC patch for Zen kernel (can improve timing accuracy in VMs).";
         };
         patches = {
-          rdtsc = {
-            enable = lib.mkEnableOption "Placeholder bottom text.";
-          };
+          rdtsc.enable = lib.mkEnableOption "Enable general RDTSC patch for the kernel (can improve timing accuracy in VMs).";
         };
         iommu = {
           enable = lib.mkEnableOption "Whether to enable IOMMU kernel parameters.";
           intel = lib.mkEnableOption "Add 'intel_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
           amd = lib.mkEnableOption "Add 'amd_iommu=on' to kernel parameters. Effective if IOMMU is enabled.";
           passthrough = lib.mkEnableOption "Add 'iommu=pt' to kernel parameters. Effective if IOMMU is enabled.";
-          vfio_devs = lib.mkOption {
+          vfio.devices = lib.mkOption {
             type = lib.types.str;
             default = "";
-            description = "Placeholder.";
+            description = "Comma-separated list of PCI device IDs (vendor:device) to bind to vfio-pci at boot. Example: \"10de:2489,10de:228b\".";
           };
         };
       };

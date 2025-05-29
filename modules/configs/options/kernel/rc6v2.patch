@@ -1,0 +1,212 @@
+diff --git a/drivers/ata/ata_piix.c b/drivers/ata/ata_piix.c
+index d441246fa357..c64c2b832fa5 100644
+--- a/drivers/ata/ata_piix.c
++++ b/drivers/ata/ata_piix.c
+@@ -156,7 +156,7 @@ static const struct pci_device_id piix_pci_tbl[] = {
+ 	/* Intel PIIX3 for the 430HX etc */
+ 	{ 0x8086, 0x7010, PCI_ANY_ID, PCI_ANY_ID, 0, 0, piix_pata_mwdma },
+ 	/* VMware ICH4 */
+-	{ 0x8086, 0x7111, 0x15ad, 0x1976, 0, 0, piix_pata_vmw },
++	{ 0x8086, 0x7111, 0x8086, 0x1976, 0, 0, piix_pata_vmw },
+ 	/* Intel PIIX4 for the 430TX/440BX/MX chipset: UDMA 33 */
+ 	/* Also PIIX4E (fn3 rev 2) and PIIX4M (fn3 rev 3) */
+ 	{ 0x8086, 0x7111, PCI_ANY_ID, PCI_ANY_ID, 0, 0, piix_pata_33 },
+diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
+index 8706763af8fb..0abb8c570f9a 100644
+--- a/drivers/gpu/drm/tiny/bochs.c
++++ b/drivers/gpu/drm/tiny/bochs.c
+@@ -767,21 +767,21 @@ static void bochs_pci_shutdown(struct pci_dev *pdev)
+ 
+ static const struct pci_device_id bochs_pci_tbl[] = {
+ 	{
+-		.vendor      = 0x1234,
++		.vendor      = 0x8086,
+ 		.device      = 0x1111,
+ 		.subvendor   = PCI_SUBVENDOR_ID_REDHAT_QUMRANET,
+ 		.subdevice   = PCI_SUBDEVICE_ID_QEMU,
+ 		.driver_data = BOCHS_QEMU_STDVGA,
+ 	},
+ 	{
+-		.vendor      = 0x1234,
++		.vendor      = 0x8086,
+ 		.device      = 0x1111,
+ 		.subvendor   = PCI_ANY_ID,
+ 		.subdevice   = PCI_ANY_ID,
+ 		.driver_data = BOCHS_UNKNOWN,
+ 	},
+ 	{
+-		.vendor      = 0x4321,
++		.vendor      = 0x8086,
+ 		.device      = 0x1111,
+ 		.subvendor   = PCI_ANY_ID,
+ 		.subdevice   = PCI_ANY_ID,
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+index bb861f0a0a31..893f0f06f6cd 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+@@ -33,7 +33,7 @@ module_param_named(modeset, vbox_modeset, int, 0400);
+ static const struct drm_driver driver;
+ 
+ static const struct pci_device_id pciidlist[] = {
+-	{ PCI_DEVICE(0x80ee, 0xbeef) },
++	{ PCI_DEVICE(0x8086, 0xbeef) },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(pci, pciidlist);
+diff --git a/drivers/input/misc/xen-kbdfront.c b/drivers/input/misc/xen-kbdfront.c
+index 67f1c7364c95..d4b9cf294518 100644
+--- a/drivers/input/misc/xen-kbdfront.c
++++ b/drivers/input/misc/xen-kbdfront.c
+@@ -250,7 +250,7 @@ static int xenkbd_probe(struct xenbus_device *dev,
+ 		kbd->name = "Xen Virtual Keyboard";
+ 		kbd->phys = info->phys;
+ 		kbd->id.bustype = BUS_PCI;
+-		kbd->id.vendor = 0x5853;
++		kbd->id.vendor = 0x8086;
+ 		kbd->id.product = 0xffff;
+ 
+ 		__set_bit(EV_KEY, kbd->evbit);
+@@ -297,7 +297,7 @@ static int xenkbd_probe(struct xenbus_device *dev,
+ 		ptr->name = "Xen Virtual Pointer";
+ 		ptr->phys = info->phys;
+ 		ptr->id.bustype = BUS_PCI;
+-		ptr->id.vendor = 0x5853;
++		ptr->id.vendor = 0x8086;
+ 		ptr->id.product = 0xfffe;
+ 
+ 		if (abs) {
+@@ -347,7 +347,7 @@ static int xenkbd_probe(struct xenbus_device *dev,
+ 		mtouch->name = "Xen Virtual Multi-touch";
+ 		mtouch->phys = info->phys;
+ 		mtouch->id.bustype = BUS_PCI;
+-		mtouch->id.vendor = 0x5853;
++		mtouch->id.vendor = 0x8086;
+ 		mtouch->id.product = 0xfffd;
+ 
+ 		input_set_abs_params(mtouch, ABS_MT_TOUCH_MAJOR,
+diff --git a/drivers/message/fusion/mptspi.c b/drivers/message/fusion/mptspi.c
+index a3901fbfac4f..1d27b84a81ec 100644
+--- a/drivers/message/fusion/mptspi.c
++++ b/drivers/message/fusion/mptspi.c
+@@ -1417,7 +1417,7 @@ mptspi_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 
+ 	/* VMWare emulation doesn't properly implement WRITE_SAME
+ 	 */
+-	if (pdev->subsystem_vendor == 0x15AD)
++	if (pdev->subsystem_vendor == 0x8086)
+ 		sh->no_write_same = 1;
+ 
+ 	spin_lock_irqsave(&ioc->FreeQlock, flags);
+diff --git a/drivers/misc/pvpanic/pvpanic-mmio.c b/drivers/misc/pvpanic/pvpanic-mmio.c
+index f3f2113a54a7..c30873817da6 100644
+--- a/drivers/misc/pvpanic/pvpanic-mmio.c
++++ b/drivers/misc/pvpanic/pvpanic-mmio.c
+@@ -58,7 +58,7 @@ static const struct of_device_id pvpanic_mmio_match[] = {
+ MODULE_DEVICE_TABLE(of, pvpanic_mmio_match);
+ 
+ static const struct acpi_device_id pvpanic_device_ids[] = {
+-	{ "QEMU0001", 0 },
++	{ "UEFI0001", 0 },
+ 	{ "", 0 }
+ };
+ MODULE_DEVICE_TABLE(acpi, pvpanic_device_ids);
+diff --git a/drivers/virt/vboxguest/vboxguest_linux.c b/drivers/virt/vboxguest/vboxguest_linux.c
+index 8c92ea5b7305..6463923a0a78 100644
+--- a/drivers/virt/vboxguest/vboxguest_linux.c
++++ b/drivers/virt/vboxguest/vboxguest_linux.c
+@@ -20,7 +20,7 @@
+ /** The device name for the device node open to everyone. */
+ #define DEVICE_NAME_USER	"vboxuser"
+ /** VirtualBox PCI vendor ID. */
+-#define VBOX_VENDORID		0x80ee
++#define VBOX_VENDORID		0x8086
+ /** VMMDev PCI card product ID. */
+ #define VMMDEV_DEVICEID		0xcafe
+ 
+diff --git a/include/linux/pci_ids.h b/include/linux/pci_ids.h
+index 2a9ca3dbaa0e..0232465cbf0f 100644
+--- a/include/linux/pci_ids.h
++++ b/include/linux/pci_ids.h
+@@ -2288,7 +2288,7 @@
+ #define PCI_VENDOR_ID_MORETON		0x15aa
+ #define PCI_DEVICE_ID_RASTEL_2PORT	0x2000
+ 
+-#define PCI_VENDOR_ID_VMWARE		0x15ad
++#define PCI_VENDOR_ID_VMWARE		0x8086
+ #define PCI_DEVICE_ID_VMWARE_VMXNET3	0x07b0
+ 
+ #define PCI_VENDOR_ID_ZOLTRIX		0x15b0
+@@ -2585,9 +2585,9 @@
+ 
+ #define PCI_VENDOR_ID_AZWAVE		0x1a3b
+ 
+-#define PCI_VENDOR_ID_REDHAT_QUMRANET    0x1af4
+-#define PCI_SUBVENDOR_ID_REDHAT_QUMRANET 0x1af4
+-#define PCI_SUBDEVICE_ID_QEMU            0x1100
++#define PCI_VENDOR_ID_REDHAT_QUMRANET    0x8086
++#define PCI_SUBVENDOR_ID_REDHAT_QUMRANET 0x8086
++#define PCI_SUBDEVICE_ID_QEMU            0x1100
+ 
+ #define PCI_VENDOR_ID_ASMEDIA		0x1b21
+ 
+@@ -3241,7 +3241,7 @@
+ #define PCI_DEVICE_ID_RME_DIGI32_PRO	0x9897
+ #define PCI_DEVICE_ID_RME_DIGI32_8	0x9898
+ 
+-#define PCI_VENDOR_ID_XEN		0x5853
++#define PCI_VENDOR_ID_XEN		0x5853
+ #define PCI_DEVICE_ID_XEN_PLATFORM	0x0001
+ 
+ #define PCI_VENDOR_ID_OCZ		0x1b85
+diff --git a/include/uapi/linux/qemu_fw_cfg.h b/include/uapi/linux/qemu_fw_cfg.h
+index e089c0159ec2..98cdc7ce0c6e 100644
+--- a/include/uapi/linux/qemu_fw_cfg.h
++++ b/include/uapi/linux/qemu_fw_cfg.h
+@@ -4,7 +4,7 @@
+ 
+ #include <linux/types.h>
+ 
+-#define FW_CFG_ACPI_DEVICE_ID	"QEMU0002"
++#define FW_CFG_ACPI_DEVICE_ID	"UEFI0002"
+ 
+ /* selector key values for "well-known" fw_cfg entries */
+ #define FW_CFG_SIGNATURE	0x00
+diff --git a/sound/hda/hdac_device.c b/sound/hda/hdac_device.c
+index 3fbb9793dcfc..2ca2569fe13f 100644
+--- a/sound/hda/hdac_device.c
++++ b/sound/hda/hdac_device.c
+@@ -664,7 +664,7 @@ static const struct hda_vendor_id hda_vendor_ids[] = {
+ 	{ 0x1854, "LG" },
+ 	{ 0x19e5, "Huawei" },
+ 	{ 0x1aec, "Wolfson Microelectronics" },
+-	{ 0x1af4, "QEMU" },
++	{ 0x8086, "QEMU" },
+ 	{ 0x1fa8, "Senarytech" },
+ 	{ 0x434d, "C-Media" },
+ 	{ 0x8086, "Intel" },
+diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
+index 1ae26bdbe756..a3a1a0635489 100644
+--- a/sound/pci/hda/hda_intel.c
++++ b/sound/pci/hda/hda_intel.c
+@@ -2770,7 +2770,7 @@ static const struct pci_device_id azx_ids[] = {
+ 	/* Vortex86MX */
+ 	{ PCI_VDEVICE(RDC, 0x3010), .driver_data = AZX_DRIVER_GENERIC },
+ 	/* VMware HDAudio */
+-	{ PCI_VDEVICE(VMWARE, 0x1977), .driver_data = AZX_DRIVER_GENERIC },
++	{ PCI_VDEVICE(VMWARE, 0x1977), .driver_data = AZX_DRIVER_GENERIC },
+ 	/* AMD/ATI Generic, PCI class code and Vendor ID for HD Audio */
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_ATI, PCI_ANY_ID),
+ 	  .class = PCI_CLASS_MULTIMEDIA_HD_AUDIO << 8,
+diff --git a/sound/pci/intel8x0.c b/sound/pci/intel8x0.c
+index e4bb99f71c2c..494255f7c2d0 100644
+--- a/sound/pci/intel8x0.c
++++ b/sound/pci/intel8x0.c
+@@ -2844,7 +2844,7 @@ static int snd_intel8x0_inside_vm(struct pci_dev *pci)
+ 		/* KVM emulated sound, PCI SSID: 1af4:1100 */
+ 		msg = "enable KVM";
+ 		result = 1;
+-	} else if (pci->subsystem_vendor == 0x1ab8) {
++	} else if (pci->subsystem_vendor == 0x8086) {
+ 		/* Parallels VM emulated sound, PCI SSID: 1ab8:xxxx */
+ 		msg = "enable Parallels VM";
+ 		result = 1;
