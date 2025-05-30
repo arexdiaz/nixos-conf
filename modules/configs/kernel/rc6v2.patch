@@ -145,7 +145,7 @@ index 2a9ca3dbaa0e..0232465cbf0f 100644
 -#define PCI_SUBDEVICE_ID_QEMU            0x1100
 +#define PCI_VENDOR_ID_REDHAT_QUMRANET    0x8086
 +#define PCI_SUBVENDOR_ID_REDHAT_QUMRANET 0x8086
-+#define PCI_SUBDEVICE_ID_QEMU            0x1100
++#define PCI_SUBDEVICE_ID_QEMU            0x1de0
  
  #define PCI_VENDOR_ID_ASMEDIA		0x1b21
  

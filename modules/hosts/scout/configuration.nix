@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  stylix = {
+    enable = false;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  };
+
   networking.hostName = "scout";
   nixpkgs.config.allowUnfree = true;
 
@@ -8,8 +13,8 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia = {
-      open    = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      open    = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
     };
     graphics = {
@@ -47,7 +52,7 @@
           enable = true;
           intel = true;
           passthrough = true;
-          vfio_devs="10de:2489,10de:228b,1b21:0612,8086:43f0";
+          vfio.devices="10de:2489,10de:228b,1b21:0612,8086:43f0";
         };
       };
       shell.fish.enable = true;

@@ -10,12 +10,25 @@ in
     ./options
     ./services.nix
     ./system.nix
-    inputs.home-manager.nixosModules.default
+    ./environment/kde.nix
+    ./environment/gnome.nix
+    ./core-pkgs.nix
+    ./common-pkgs.nix
+    ./emulators
+    ./game-pkgs.nix
+    ./kernel
+    ./media-pkgs.nix
+    ./tool-pkgs.nix
+    ./shell/fish-shell.nix
+    ./virtualization/docker.nix
+    ./virtualization/virtman.nix
+    ./shell/aliases/vfio
+    ./options
   ];
 
   nixpkgs.overlays =
-    (lib.optionals qemu-patch.enable [(import ./options/overlays/qemu-custom.nix)]) ++
-    (lib.optionals ovmf-patch.enable [(import ./options/overlays/ovmf-patch.nix)])
+    (lib.optionals qemu-patch.enable [(import ./overlays/qemu-custom.nix)]) ++
+    (lib.optionals ovmf-patch.enable [(import ./overlays/ovmf-patch.nix)])
     ; # Add more by appending ++ to the last import
 
   nixpkgs.config.allowUnfree = true;

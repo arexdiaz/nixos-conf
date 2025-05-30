@@ -1,22 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./environment/kde.nix
-    ./environment/gnome.nix
-    ./core-pkgs.nix
-    ./common-pkgs.nix
-    ./emulators
-    ./game-pkgs.nix
-    ./kernel
-    ./media-pkgs.nix
-    ./tool-pkgs.nix
-    ./shell/fish-shell.nix
-    ./virtualization/docker.nix
-    ./virtualization/virtman.nix
-    ./shell/aliases/vfio
-  ];
-
   options.preconfs = {
     pkgs = {
       core = {
@@ -52,7 +36,7 @@
       };
       kernel = {
         cachyos = {
-          enable = lib.mkEnableOption "Whether to enable the CachyOS kernel and bpf scheduler.";
+          enable = lib.mkEnableOption "Whether to enable the CachyOS kernel.";
         };
         zen = {
           enable = lib.mkEnableOption "Placeholder bottomt text.";

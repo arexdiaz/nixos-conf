@@ -1,7 +1,10 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  imports = [
+    inputs.home-manager.nixosModules.default
+  ];
+
   users.users.rx = {
     isNormalUser = true;
     description = "arexito";
