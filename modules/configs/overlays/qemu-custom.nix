@@ -8,6 +8,12 @@ let
     rev = "18e67df0791c5c912d3eacab1ba8f2edd83fa43f";
     sha256 = "sha256-nHIzcb7qCQlD2v8Rwx4uL18fPDepw5ly94DNiyv/ZkY=";
   };
+  misc = prev.fetchFromGitHub {
+    owner = "arexdiaz";
+    repo = "patches";
+    rev = "8a4ff580356709385dad4e5570ad6d4f4becc0e8";
+    sha256 = "sha256-ImdotMTQKcqOn9NWgoB0LmHqQio10Z9zcFJcI5+6QEk=";
+  };
   patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
 in {
   qemu = prev.qemu.overrideAttrs (oldAttrs: rec {
@@ -21,6 +27,7 @@ in {
     };
 
     patches = (oldAttrs.patches) ++ [
+      "${misc}/qemu-osi.patch"
       "${patchDir}/QEMU/intel-qemu-${qemuVersion}.patch"
       "${patchDir}/QEMU/qemu-${qemuVersion}-libnfs6.patch"
     ];

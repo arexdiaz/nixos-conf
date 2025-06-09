@@ -23,7 +23,6 @@ in
     (lib.mkIf (virtualOptionConf.enable && virtualManagerCfg.enable) {
       programs.virt-manager.enable = true;
       users.groups.libvirtd.members = virtualManagerCfg.libvirtdMembers;
-      # users.users.rx.extraGroups = [ "kvm" ];
       environment.systemPackages = with pkgs;
         lib.optionals isoCfg.enable [ virtioWinISO looking-glass-client ];
 

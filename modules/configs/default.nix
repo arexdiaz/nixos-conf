@@ -22,6 +22,7 @@ in
     ./shell/fish-shell.nix
     ./virtualization/docker.nix
     ./virtualization/virtman.nix
+    ./virtualization/looking-glass.nix
     ./shell/aliases/vfio
     ./options
   ];

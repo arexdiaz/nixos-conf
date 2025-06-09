@@ -81,6 +81,33 @@
             enable = lib.mkEnableOption "Whether to install window drivers for virt manager.";
           };
         };
+        looking-glass = {
+          enable = lib.mkEnableOption "enable Looking Glass (client, kvmfr, and hooks)";
+          vmNames = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+          };
+          user = lib.mkOption {
+            type = lib.types.str;
+            default = "rx";
+          };
+          group = lib.mkOption {
+            type = lib.types.str;
+            default = "kvm";
+          };
+          permissions = lib.mkOption {
+            type = lib.types.str;
+            default = "0660";
+          };
+          shmSize = lib.mkOption {
+            type = lib.types.int;
+            default = 32;
+          };
+          fullscreen = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+        };
         docker = {
           enable = lib.mkEnableOption "Whether to enable Docker.";
           users = lib.mkOption {

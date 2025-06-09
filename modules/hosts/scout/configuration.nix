@@ -58,6 +58,14 @@
       shell.fish.enable = true;
       virtualization = {
         enable = true;
+        looking-glass = {
+          enable = true;
+          vmNames = [ "win10-vmlike" ];
+          user = "rx";
+          group = "kvm";
+          shmSize = 32;
+          fullscreen = true;
+        };
         virtualManager = {
           enable = true;
           QemuPatch.enable = true;
@@ -77,9 +85,9 @@
     };
 
     xrdp = {
-      enable = false;
+      enable = true;
       openFirewall = true;
-      defaultWindowManager = "startplasma-wayland";
+      defaultWindowManager = "startplasma-x11";
     };
   };
 
