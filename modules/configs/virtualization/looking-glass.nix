@@ -11,13 +11,18 @@ lib.mkIf cfg.enable {
     kernelModules = [ "kvmfr" ];
     kernelParams = [ "kvmfr.static_size_mb=${toString cfg.shmSize}" ];
   };
+  environment.systemPackages = with pkgs; [ looking-glass-client ];
 
   services.udev.extraRules = ''KERNEL=="kvmfr*", OWNER="${cfg.user}", GROUP="${cfg.group}", MODE="${cfg.permissions}"'';
 
   virtualisation.libvirtd = {
     qemu.verbatimConfig = ''
       namespaces = []
-      cgroup_device_acl = ["/dev/kvmfr0"]
+      cgroup_device_acl = [
+        "/dev/null", "/dev/full", "/dev/zero", "/dev/random", "/dev/urandom",
+        "/dev/ptmx", "/dev/kvm", "/dev/kvmfr0"
+      ]
     '';
+    hooks.qemu = {};
   };
 }
