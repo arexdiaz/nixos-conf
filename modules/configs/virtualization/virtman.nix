@@ -17,13 +17,16 @@ let
   };
 
   isoStorePath = "${virtioWinISO}/virtio-win.iso";
+  memprocfs = pkgs.callPackage ./memprocfs.nix {};
 in
 {
   config = lib.mkMerge [
     (lib.mkIf (virtualOptionConf.enable && virtualManagerCfg.enable) {
       programs.virt-manager.enable = true;
       users.groups.libvirtd.members = virtualManagerCfg.libvirtdMembers;
-      environment.systemPackages = with pkgs; lib.optionals isoCfg.enable [ virtioWinISO ];
+      environment.systemPackages = with pkgs;
+        (lib.optionals isoCfg.enable [ virtioWinISO ]) ++
+        (lib.optionals virtualOptionConf.memprocfs.enable [ memprocfs ]);
       virtualisation.libvirtd = {
         enable = true;
         qemu = {

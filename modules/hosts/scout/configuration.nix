@@ -7,8 +7,6 @@
   };
 
   networking.hostName = "scout";
-  nixpkgs.config.allowUnfree = true;
-
   boot.blacklistedKernelModules = [ "nouveau" ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {

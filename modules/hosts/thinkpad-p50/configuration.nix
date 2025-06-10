@@ -1,5 +1,4 @@
 { config, ... }:
-
 {
   networking = {
     hostName = "lvnpc";
@@ -36,6 +35,7 @@
       shell.fish.enable = true;
       virtualization = {
         enable = true;
+        memprocfs.enable = true;
         virtualManager = {
           enable = true;
           libvirtdMembers = [ "rx" ];

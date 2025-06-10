@@ -64,6 +64,7 @@
       };
       virtualization = {
         enable = lib.mkEnableOption "Whether to enable virtualization packages.";
+        memprocfs.enable = lib.mkEnableOption "Whether to enable memprocfs with qemu device plugin.";
         virtualManager = {
           enable = lib.mkEnableOption "Whether to install qemu with virtual manager.";
           QemuPatch = {
