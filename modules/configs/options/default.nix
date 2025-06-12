@@ -90,11 +90,11 @@
           };
           user = lib.mkOption {
             type = lib.types.str;
-            default = "rx";
+            default = "qemu-libvirtd";
           };
           group = lib.mkOption {
             type = lib.types.str;
-            default = "kvm";
+            default = "libvirtd";
           };
           permissions = lib.mkOption {
             type = lib.types.str;

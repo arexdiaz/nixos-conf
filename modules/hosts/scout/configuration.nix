@@ -6,6 +6,18 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
   };
 
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+      AllowUsers = [ "rx" ];
+      UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "prohibit-password";
+    };
+  };
+
   networking.hostName = "scout";
   boot.blacklistedKernelModules = [ "nouveau" ];
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -56,11 +68,10 @@
       shell.fish.enable = true;
       virtualization = {
         enable = true;
+        memprocfs.enable = true;
         looking-glass = {
           enable = true;
           vmNames = [ "win10-vmlike" ];
-          user = "rx";
-          group = "kvm";
           shmSize = 32;
           fullscreen = true;
         };
@@ -90,6 +101,10 @@
   };
 
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  fuse
+  libusb1
+];
   powerManagement.cpuFreqGovernor = "performance";
 
   fileSystems = {
