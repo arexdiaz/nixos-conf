@@ -17,7 +17,7 @@ let
   };
 
   isoStorePath = "${virtioWinISO}/virtio-win.iso";
-  memprocfs = pkgs.callPackage ./memprocfs.nix {};
+  memprocfs = pkgs.callPackage ./leechcore.nix {};
 in
 {
   config = lib.mkMerge [
