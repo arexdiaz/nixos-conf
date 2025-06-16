@@ -18,6 +18,8 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 6789 8000 28474 ];
+  
   networking.hostName = "scout";
   boot.blacklistedKernelModules = [ "nouveau" ];
   services.xserver.videoDrivers = [ "nvidia" ];
