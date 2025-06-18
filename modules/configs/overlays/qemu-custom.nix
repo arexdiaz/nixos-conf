@@ -11,8 +11,8 @@ let
   rxpatches = prev.fetchFromGitHub {
     owner = "arexdiaz";
     repo = "patches";
-    rev = "e510cc58759d8b032ed4560d3b487e58d799cec4";
-    sha256 = "sha256-eL/nHKGkINtgx1HFkgIFvtDZM3Mfry/RCj6oyB7WVGM=";
+    rev = "0a7bcfbf027195d46da994e985c8397e485bb715";
+    sha256 = "sha256-8opBfjr0xmCPzrEmq7QDUu2vZzWFlOJMJPtjck32AuU=";
   };
   patchDir = "${hyphantom}/Hypervisor-Phantom/patches/";
 in {
