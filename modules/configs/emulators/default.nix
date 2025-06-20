@@ -26,7 +26,7 @@ in
   config = lib.mkIf config.preconfs.pkgs.emulators.enable {
     environment.systemPackages = with pkgs;
       lib.optionals config.preconfs.pkgs.emulators.wine.enable [
-        wineWow64Packages.unstableFull
+        wineWowPackages.unstableFull
         winetricks
       ] ++ lib.optionals config.preconfs.pkgs.emulators.gaming.pcsx2.enable [
         pcsx2wrap
