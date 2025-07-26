@@ -27,7 +27,7 @@ in {
     };
 
     patches = (oldAttrs.patches) ++ [
-      "${rxpatches}/qemu-10.0-pcileech.patch"
+      "${rxpatches}/qemu-pcileech.patch"
       "${rxpatches}/qemu-osi.patch"
       "${patchDir}/QEMU/intel-qemu-${qemuVersion}.patch"
       "${patchDir}/QEMU/qemu-${qemuVersion}-libnfs6.patch"
