@@ -22,6 +22,8 @@ in
 {
   config = lib.mkMerge [
     (lib.mkIf (virtualOptionConf.enable && virtualManagerCfg.enable) {
+      boot.kernel.sysctl."net.ipv4.ip_forward" = true;
+      networking.firewall.trustedInterfaces = [ "virbr0" ];
       programs.virt-manager.enable = true;
       users.groups.libvirtd.members = virtualManagerCfg.libvirtdMembers;
       environment.systemPackages = with pkgs;
