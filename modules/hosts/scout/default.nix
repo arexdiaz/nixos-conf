@@ -7,6 +7,5 @@
     ./configuration.nix
     ./hardware-configuration.nix
     inputs.nix-flatpak.nixosModules.nix-flatpak
-    inputs.stylix.nixosModules.stylix
   ];
 }
