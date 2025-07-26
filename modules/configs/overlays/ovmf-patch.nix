@@ -8,7 +8,6 @@ let
     rev = "18e67df0791c5c912d3eacab1ba8f2edd83fa43f";
     sha256 = "sha256-nHIzcb7qCQlD2v8Rwx4uL18fPDepw5ly94DNiyv/ZkY=";
   }}/Hypervisor-Phantom/patches/";
-
   pythonEnv = prev.buildPackages.python3.withPackages (ps: [ ps.tkinter ]);
   targetArch =
     if prev.stdenv.hostPlatform.isi686 then "IA32"
@@ -22,7 +21,8 @@ let
 
   edk2 = prev.edk2.overrideAttrs (oldEdk2Attrs: rec {
     version = edk2Version;
-    
+    __intentionallyOverridingVersion = true;
+
     passthru = oldEdk2Attrs.passthru // {
       tests.uefiUsb = oldEdk2Attrs.passthru.tests.uefiUsb;
       updateScript = oldEdk2Attrs.passthru.updateScript;
@@ -46,31 +46,11 @@ let
               patches = (oldApplyPatchesAttrs.patches or []) ++ [
                 "${patchDir}/EDK2/intel-edk2-stable${edk2Version}.patch"
               ];
-
-              postPatch = '' # openssl_3 gave me a huge migrane
-                # We don't want EDK2 to keep track of OpenSSL, they're frankly bad at it.
-                rm -r CryptoPkg/Library/OpensslLib/openssl
-                mkdir -p CryptoPkg/Library/OpensslLib/openssl
-                (
-                  cd CryptoPkg/Library/OpensslLib/openssl
-                  tar --strip-components=1 -xf ${prev.buildPackages.openssl.src}
-
-                  ${prev.lib.pipe prev.buildPackages.openssl.patches [
-                    (builtins.filter (
-                      patch:
-                      !builtins.elem (baseNameOf patch) [
-                        # Exclude patches not required in this context.
-                        "nix-ssl-cert-file.patch"
-                        "openssl-disable-kernel-detection.patch"
-                        "use-etc-ssl-certs-darwin.patch"
-                        "use-etc-ssl-certs.patch"
-                      ]
-                    ))
-                    (map (patch: "patch -p1 < ${patch}\n"))
-                    prev.lib.concatStrings
-                  ]}
-                )
-
+              
+              # FIX: Removed the entire OpenSSL replacement logic. The build will now
+              # use the vendored OpenSSL source from EDK2, which is what the
+              # build system expects.
+              postPatch = ''
                 # enable compilation using Clang
                 # https://bugzilla.tianocore.org/show_bug.cgi?id=4620
                 substituteInPlace BaseTools/Conf/tools_def.template --replace-fail \
@@ -91,20 +71,17 @@ let
               rm -rf BaseTools
               ln -sv ${prev.buildPackages.edk2}/BaseTools BaseTools
             '';
-
             configurePhase = ''
               runHook preConfigure
               export WORKSPACE="$PWD"
               . ${prev.buildPackages.edk2}/edksetup.sh BaseTools
               runHook postConfigure
             '';
-
             buildPhase = ''
               runHook preBuild
               build -a ${targetArch} -b ${attrs.buildConfig or "RELEASE"} -t ${buildType} -p ${projectDscPath} -n $NIX_BUILD_CORES $buildFlags
               runHook postBuild
             '';
-
             installPhase = ''
               runHook preInstall
               mv -v Build/*/* $out
