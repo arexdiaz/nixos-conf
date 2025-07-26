@@ -15,20 +15,20 @@ let
   memprocfsFetched = fetchFromGitHub {
     owner = "ufrisk";
     repo = "MemProcFS";
-    rev = "ba39cf3bdab2cc791029ace476aeabe7ab7755cd";
-    sha256 = "sha256-UAgM/tNEUoo6nCVMmGsLZg+xMke7jseudPdXPkJLNs0=";
+    rev = "8fa197f7bebaa1520fdbb4a4a5aae768d14aa84c";
+    sha256 = "sha256-A1tNbsP0wVVBalO1I4baktd+25IcPMyUYfeCrrxJw5M=";
   };
   leechcorePluginFetched = fetchFromGitHub {
     owner = "ufrisk";
     repo = "LeechCore-plugins";
-    rev = "103fb1fdc9c2c328caede4151221ba0f8be64cd0";
-    sha256 = "sha256-Z+gn9PyPhLG1qZAYnbZDzEuPK51JY0XPhzOj3U/n5C0=";
+    rev = "12cde3099269367540f7ed73376135e65c437955";
+    sha256 = "sha256-tMGOCVX1jrBU5riSk/yTRVAmIxYDpoPpvJlTlR5AOao=";
   };
   pcileechFetched = fetchFromGitHub {
     owner = "ufrisk";
     repo = "pcileech";
-    rev = "fc6c913b67ccb8719fa71e3440f165fb7de0b990";
-    sha256 = "sha256-qb7GxsHfxD+6T/RBBIMcceydVn20Ql+3wm/nYLztrWc=";
+    rev = "3ca4e7be4f4c33ab30ad0b1c7d31514bc4840022";
+    sha256 = "sha256-9nsmWkmUw6y2rnsL0VNH4THSrwVyNtHox/ZJs9y/+Es=";
   };
   combinedSources = runCommand "memprocfs-combined-sources" {} ''
     mkdir -p $out
@@ -63,14 +63,14 @@ stdenv.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    install -d $out/bin
-    install -d $out/lib/memprocfs
+    install -d $out/bin $out/lib
     install -m 755 ./MemProcFS/files/memprocfs $out/bin/
     install -m 755 ./pcileech/files/pcileech $out/bin/
-    install -m 644 ./MemProcFS/files/vmm.so $out/lib/memprocfs/
-    install -m 644 ./LeechCore/files/leechcore.so $out/lib/memprocfs/
-    install -m 644 ./plugins/files/leechcore_device_qemu.so $out/lib/memprocfs/
-    install -m 644 ./plugins/files/leechcore_device_qemupcileech.so $out/lib/memprocfs/
+    install -m 644 ./MemProcFS/files/vmm.so $out/lib/
+    install -m 644 ./LeechCore/files/leechcore.so $out/lib/
+    install -m 644 ./plugins/files/leechcore_device_qemu.so $out/lib/
+    install -m 644 ./plugins/files/leechcore_device_qemupcileech.so $out/lib/
     runHook postInstall
   '';
+
 }
