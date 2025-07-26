@@ -1,23 +1,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  stylix = {
-    enable = false;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-  };
-
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = [ "rx" ];
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "prohibit-password";
-    };
-  };
-
   networking.firewall.allowedTCPPorts = [ 6789 8000 28474 ];
   
   networking.hostName = "scout";
@@ -64,7 +47,7 @@
           enable = true;
           intel = true;
           passthrough = true;
-          vfio.devices="10de:2489,10de:228b,1b21:0612,8086:43f0";
+          vfio.devices="10de:2489,10de:228b,1b21:0612";
         };
       };
       shell.fish.enable = true;
@@ -93,12 +76,6 @@
       enable = true;
       openFirewall  = true;
       user = "rx";
-    };
-
-    xrdp = {
-      enable = true;
-      openFirewall = true;
-      defaultWindowManager = "startplasma-x11";
     };
   };
 
