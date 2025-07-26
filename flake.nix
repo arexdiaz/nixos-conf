@@ -8,10 +8,6 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     notion-app-electron.url = "github:arexdiaz/notion-app-electron";
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
