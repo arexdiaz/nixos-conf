@@ -4,11 +4,11 @@
   imports = [
     inputs.home-manager.nixosModules.default
   ];
-
+  nix.settings.trusted-users = [ "rx" ];
   users.users.rx = {
     isNormalUser = true;
     description = "arexito";
-    extraGroups = [ "networkmanager" "wheel" "i2c" ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" "input" ];
   };
 
   # Run commands as root w/o password.

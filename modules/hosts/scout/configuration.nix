@@ -1,10 +1,10 @@
 { config, pkgs, inputs, ... }:
 
 {
-  networking.firewall.allowedTCPPorts = [ 6789 8000 28474 ];
-  
+  networking.firewall.allowedTCPPorts = [ 6789 8000 ];
   networking.hostName = "scout";
   boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.kernelModules = [ "uinput" ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     nvidia = {
@@ -36,7 +36,9 @@
       };
     };
     system = {
-      desktop.environment.kde.enable = true;
+      desktop.environment = {
+        kde.enable = true;
+      };
       kernel = {
         zen = {
           enable = true;
@@ -81,9 +83,9 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-  fuse
-  libusb1
-];
+    fuse
+    libusb1
+  ];
   powerManagement.cpuFreqGovernor = "performance";
 
   fileSystems = {
@@ -104,5 +106,5 @@
   #   enable = true;
   # };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "24.11"; # Current version is 25.05
 }
