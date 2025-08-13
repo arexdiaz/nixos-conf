@@ -42,7 +42,6 @@ let
                 fetchSubmodules = true;
                 sha256 = "sha256-VuiEqVpG/k7pfy0cOC6XmY+8NBtU/OHdDB9Y52tyNe8=";
               };
-
               patches = (oldApplyPatchesAttrs.patches or []) ++ [
                 "${patchDir}/EDK2/intel-edk2-stable${edk2Version}.patch"
               ];
@@ -69,7 +68,7 @@ let
 
             prePatch = ''
               rm -rf BaseTools
-              ln -sv ${prev.buildPackages.edk2}/BaseTools BaseTools
+              cp -r ${prev.buildPackages.edk2}/BaseTools ./BaseTools
             '';
             configurePhase = ''
               runHook preConfigure
@@ -96,9 +95,24 @@ let
     };
   });
 in {
-  OVMF = final.callPackage (prev.path + "/pkgs/applications/virtualization/OVMF/default.nix") {
-    stdenv = prev.stdenv;
-    edk2 = edk2;
-    pexpect = prev.pexpect or final.pexpect;
-  };
+  OVMF = let
+    # Step 1: Call the original OVMF package with your custom edk2
+    unpatchedOVMF = final.callPackage (prev.path + "/pkgs/applications/virtualization/OVMF/default.nix") {
+      stdenv = prev.stdenv;
+      edk2 = edk2;
+      # Change this line
+      pexpect = final.python3Packages.pexpect;
+    };
+
+    # Step 2: Override the initial arguments for Secure Boot
+    configuredOVMF = unpatchedOVMF.override {
+      secureBoot = true;
+      msVarsTemplate = true;
+    };
+
+  # Step 3: Override the final attributes to add the openssl build input
+  in configuredOVMF.overrideAttrs (old: {
+    nativeBuildInputs = old.nativeBuildInputs ++ [ final.openssl ];
+  });
+
 }
