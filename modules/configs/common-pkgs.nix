@@ -10,6 +10,7 @@
       alacritty
       onlyoffice-desktopeditors
       vscode
+      code-cursor
       notion-app-electron
     ];
 

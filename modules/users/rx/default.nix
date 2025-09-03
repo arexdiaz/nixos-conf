@@ -8,7 +8,7 @@
   users.users.rx = {
     isNormalUser = true;
     description = "arexito";
-    extraGroups = [ "networkmanager" "wheel" "i2c" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" "input" "kvm" ];
   };
 
   # Run commands as root w/o password.

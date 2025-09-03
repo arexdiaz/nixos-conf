@@ -78,6 +78,11 @@
             default = [];
             description = "List of users to add to the libvirtd group.";
           };
+          libvirtMembers = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+            description = "List of users to add to the libvirt group.";
+          };
           virtioWinISO = {
             enable = lib.mkEnableOption "Whether to install window drivers for virt manager.";
           };
