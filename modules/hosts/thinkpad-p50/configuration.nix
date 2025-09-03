@@ -30,7 +30,7 @@
       desktop.environment.kde.enable = true;
       kernel = {
         cachyos.enable = false;
-        scx.enable = true;
+        scx.enable = false;
       };
       shell.fish.enable = true;
       virtualization = {
