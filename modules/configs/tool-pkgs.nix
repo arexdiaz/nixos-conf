@@ -3,6 +3,7 @@
 lib.mkIf config.preconfs.pkgs.tools.enable {
   environment.systemPackages = with pkgs; [
     burpsuite
+    devenv
     nmap
     remmina
     wireshark

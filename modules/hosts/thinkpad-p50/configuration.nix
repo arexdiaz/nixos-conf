@@ -42,7 +42,7 @@
           virtioWinISO.enable = true;
         };
         docker = {
-          enable = false;
+          enable = true;
           users = [ "rx" ];
         };
       };

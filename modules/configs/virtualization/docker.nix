@@ -1,16 +1,30 @@
- { lib, config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
-# This module's content is conditional on the docker enable option
 lib.mkIf config.preconfs.system.virtualization.docker.enable {
-  environment.systemPackages = with pkgs; [
-    docker-compose
-  ];
 
-  # Enable the system-level Docker service
-  virtualisation.docker.enable = true;
+  programs.fish.shellAliases = {
+    dcu = "docker compose up";
+    dcd = "docker compose down";
+    dcr = "docker compose restart";
+    dcp = "docker compose ps";
+    dcl = "docker compose logs";
+    dce = "docker compose exec";
+    dcb = "docker compose build";
+  };
 
-  # Add specified users to the 'docker' group
-  # This uses the `users` option defined in virtualization/default.nix
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      experimental = true;
+      default-address-pools = [
+        {
+          base = "172.30.0.0/16";
+          size = 24;
+        }
+      ];
+    };
+  };
+
   users.extraGroups.docker.members = config.preconfs.system.virtualization.docker.users;
   users.users = builtins.listToAttrs (map (userName: {
     name = userName;

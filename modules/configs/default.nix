@@ -23,7 +23,6 @@ in
     ./virtualization/docker.nix
     ./virtualization/virtman.nix
     ./virtualization/looking-glass.nix
-    ./shell/aliases/vfio
     ./options
   ];
 
