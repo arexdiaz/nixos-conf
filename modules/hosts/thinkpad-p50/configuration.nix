@@ -17,7 +17,6 @@
     enable = true;
   };
 
-  # local packages
   preconfs = {
     pkgs = {
       core.enable = true;
@@ -29,8 +28,8 @@
     system = {
       desktop.environment.kde.enable = true;
       kernel = {
-        cachyos.enable = false;
-        scx.enable = false;
+        cachyos.enable = true;
+        scx.enable = true;
       };
       shell.fish.enable = true;
       virtualization = {

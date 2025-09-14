@@ -4,7 +4,6 @@ let
   virtualOptionConf = config.preconfs.system.virtualization;
   virtualManagerCfg = virtualOptionConf.virtualManager;
   isoCfg = virtualManagerCfg.virtioWinISO;
-  symlinkPath = "/var/lib/libvirt/images/virtio-win.iso";
 
   virtioWinISO = pkgs.stdenv.mkDerivation {
     name = "virtio-win.iso";
@@ -16,6 +15,7 @@ let
     '';
   };
 
+  symlinkPath = "/var/lib/libvirt/images/virtio-win.iso";
   isoStorePath = "${virtioWinISO}/virtio-win.iso";
   memprocfs = pkgs.callPackage ./leechcore.nix {};
 in
