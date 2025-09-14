@@ -6,4 +6,19 @@ lib.mkIf config.preconfs.pkgs.media.enable {
     spotify
     vlc
   ];
+
+  services.plex = lib.mkIf config.preconfs.pkgs.media.plex.enable {
+    enable = true;
+    openFirewall = true;
+    user = config.preconfs.pkgs.media.plex.user;
+  };
+
+  systemd.services.plex = lib.mkIf config.preconfs.pkgs.media.plex.enable {
+    serviceConfig = {
+      TimeoutStopSec = lib.mkForce config.preconfs.pkgs.media.plex.timeoutStopSec;
+      KillMode = lib.mkForce "mixed";
+      KillSignal = lib.mkForce "SIGTERM";
+      FinalKillSignal = lib.mkForce "SIGKILL";
+    };
+  };
 }

@@ -18,13 +18,19 @@
     };
   };
 
-  # local packages
   preconfs = {
     pkgs = {
       core.enable = true;
       common.enable = true;
       games.enable = true;
-      media.enable = true;
+      media = {
+        enable = true;
+        plex = {
+          enable = true;
+          user = "rx";
+          timeoutStopSec = 5;
+        };
+      };
       tools.enable = true;
       emulators = {
         enable = true;
@@ -67,17 +73,10 @@
           QemuPatch.enable = true;
           OvmfPatch.enable = true;
           libvirtdMembers = [ "rx" ];
+          libvirtMembers = [ "rx" ];
           virtioWinISO.enable = true;
         };
       };
-    };
-  };
-
-  services = {
-    plex = {
-      enable = true;
-      openFirewall  = true;
-      user = "rx";
     };
   };
 

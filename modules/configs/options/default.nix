@@ -17,6 +17,17 @@
       };
       media = {
         enable = lib.mkEnableOption "Whether to enable media packages.";
+        plex = {
+          enable = lib.mkEnableOption "Whether to enable Plex Media Server.";
+          user = lib.mkOption {
+            type = lib.types.str;
+            default = "plex";
+          };
+          timeoutStopSec = lib.mkOption {
+            type = lib.types.int;
+            default = 30;
+          };
+        };
       };
       tools = {
         enable = lib.mkEnableOption "Whether to enable tool packages.";
