@@ -28,10 +28,6 @@ let
     {
       name = "rc6-patch";
       patch = "${misc}/rc6v2.patch";
-    }
-    {
-      name = "vmx-tracer-patch";
-      patch = ../patches/vmx.patch;
     }];
 
     structuredExtraConfig = with lib.kernel; {
