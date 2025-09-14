@@ -6,24 +6,23 @@ let
 in
 {
   imports = [
-    ./networking.nix
-    ./options
-    ./services.nix
-    ./system.nix
     ./environment/kde.nix
     ./environment/gnome.nix
-    ./core-pkgs.nix
-    ./common-pkgs.nix
     ./emulators
-    ./game-pkgs.nix
     ./kernel
-    ./media-pkgs.nix
-    ./tool-pkgs.nix
+    ./networking.nix
+    ./options
+    ./pkgs-common.nix
+    ./pkgs-core.nix
+    ./pkgs-games.nix
+    ./pkgs-media.nix
+    ./pkgs-tools.nix
     ./shell/fish-shell.nix
+    ./system.nix
+    ./services.nix
     ./virtualization/docker.nix
     ./virtualization/virtman.nix
     ./virtualization/looking-glass.nix
-    ./options
   ];
 
   nixpkgs.overlays =

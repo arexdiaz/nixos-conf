@@ -8,10 +8,11 @@
   config = lib.mkIf config.preconfs.pkgs.common.enable {
     environment.systemPackages = with pkgs; [
       alacritty
-      onlyoffice-desktopeditors
-      vscode
       code-cursor
+      vscode
       notion-app-electron
+      onlyoffice-desktopeditors
+      remmina
     ];
 
     programs = {

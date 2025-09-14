@@ -5,7 +5,6 @@ lib.mkIf config.preconfs.pkgs.tools.enable {
     burpsuite
     devenv
     nmap
-    remmina
     wireshark
     ghidra
   ];

@@ -46,12 +46,6 @@ in
             ];
           };
         };
-        extraConfig = ''
-          passthrough_input_devices = [
-            "/dev/input/by-id/usb-Beijing_Jingyunmake_Technology_Co.__Ltd._G-Wolves_HTS_4K_Receiver-N-event-mouse",
-            "/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd"
-          ]
-        '';
       };
       environment.variables = {
         LIBVIRT_DEFAULT_URI = "qemu:///system";
