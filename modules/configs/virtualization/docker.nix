@@ -25,6 +25,11 @@ lib.mkIf config.preconfs.system.virtualization.docker.enable {
     };
   };
 
+  # Enable Docker buildx for cross-platform builds
+  environment.systemPackages = with pkgs; [
+    docker-buildx
+  ];
+
   users.extraGroups.docker.members = config.preconfs.system.virtualization.docker.users;
   users.users = builtins.listToAttrs (map (userName: {
     name = userName;

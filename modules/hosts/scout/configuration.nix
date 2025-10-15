@@ -52,7 +52,7 @@
         };
         scx.enable = true;
         iommu = {
-          enable = true;
+          enable = false;
           intel = true;
           passthrough = true;
           vfio.devices="10de:2489,10de:228b,1b21:0612";
@@ -70,21 +70,22 @@
         };
         virtualManager = {
           enable = true;
-          QemuPatch.enable = true;
-          OvmfPatch.enable = true;
+          QemuPatch.enable = false;
+          OvmfPatch.enable = false;
           libvirtdMembers = [ "rx" ];
           libvirtMembers = [ "rx" ];
           virtioWinISO.enable = true;
+        };
+        docker = {
+          enable = true;
+          users = [ "rx" ];
         };
       };
     };
   };
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    fuse
-    libusb1
-  ];
+
   powerManagement.cpuFreqGovernor = "performance";
 
   fileSystems = {

@@ -8,6 +8,14 @@ lib.mkIf config.preconfs.pkgs.games.enable {
     parsec-bin
   ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      bolt-launcher = prev.bolt-launcher.override {
+        jdk17 = final.openjdk11;
+      };
+    })
+  ];
+
   programs = {
     steam.enable = true;
   };
