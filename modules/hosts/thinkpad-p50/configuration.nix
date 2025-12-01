@@ -2,7 +2,7 @@
 {
   networking = {
     hostName = "lvnpc";
-    firewall.allowedTCPPorts = [ 3000 ];
+    firewall.allowedTCPPorts = [ 3000 43595 ];
   };
 
   # Enable beta nvidia drivers
@@ -26,14 +26,14 @@
       tools.enable  = true;
     };
     system = {
-      desktop.environment.kde.enable = true;
+      desktop.environment.gnome.enable = true;
       kernel = {
         cachyos.enable = true;
         scx.enable = true;
       };
       shell.fish.enable = true;
       virtualization = {
-        enable = true;
+        enable = false;
         memprocfs.enable = true;
         virtualManager = {
           enable = true;
