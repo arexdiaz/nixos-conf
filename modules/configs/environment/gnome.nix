@@ -13,6 +13,7 @@ lib.mkIf config.preconfs.system.desktop.environment.gnome.enable {
     gnomeExtensions.forge
     gnomeExtensions.logo-menu
     gnomeExtensions.open-bar
+    gnomeExtensions.media-controls
   ];
 
   # required by brightess control

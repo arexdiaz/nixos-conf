@@ -26,7 +26,7 @@
       tools.enable  = true;
     };
     system = {
-      desktop.environment.gnome.enable = true;
+      desktop.environment.kde.enable = true;
       kernel = {
         cachyos.enable = true;
         scx.enable = true;
