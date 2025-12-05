@@ -17,7 +17,6 @@
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
-
   preconfs = {
     pkgs = {
       core.enable = true;
@@ -48,7 +47,7 @@
       kernel = {
         zen = {
           enable = true;
-          patch.rdtsc.enable = true;
+          patch.rdtsc.enable = false;
         };
         scx.enable = true;
         iommu = {
