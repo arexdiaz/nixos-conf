@@ -8,7 +8,7 @@
   config = lib.mkIf config.preconfs.pkgs.common.enable {
     environment.systemPackages = with pkgs; [
       alacritty
-      code-cursor
+      antigravity
       vscode
       notion-app-electron
       onlyoffice-desktopeditors

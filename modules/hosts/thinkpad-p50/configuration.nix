@@ -10,6 +10,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.beta; # Available options: stable | beta
   };
 
+  boot.kernelModules = [ "uinput" ];
+  services.udev.extraRules = ''
+    KERNEL=="event*", SUBSYSTEM=="input", GROUP="input", MODE="0640"
+  '';
+
   boot.blacklistedKernelModules = [ "nouveau" ];
   programs.nix-ld.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
@@ -31,7 +36,9 @@
         cachyos.enable = true;
         scx.enable = true;
       };
-      shell.fish.enable = true;
+      shell.fish.enable = false;
+      shell.zsh.enable = true;
+      shell.zsh.ohMyZsh.enable = true;
       virtualization = {
         enable = false;
         memprocfs.enable = true;

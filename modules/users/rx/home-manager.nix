@@ -6,6 +6,30 @@
     userName = "arexdiaz";
     userEmail = "arexito@icloud.com";
   };
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = let meslo = "MesloLGS NF"; in {
+        normal = {
+          family = meslo;
+          style = "Regular";
+        };
+        bold = {
+          family = meslo;
+          style = "Bold";
+        };
+        italic = {
+          family = meslo;
+          style = "Italic";
+        };
+        bold_italic = {
+          family = meslo;
+          style = "Bold Italic";
+        };
+        size = 12.0;
+      };
+    };
+  };
 
   home = {
     username = "rx";
@@ -69,6 +93,32 @@
         X-GNOME-Autostart-enabled=true
         Name=Ulauncher
         Comment=Application launcher
+      '';
+
+      ".local/share/konsole/Meslo.profile".text = ''
+        [Appearance]
+        ColorScheme=Linux
+        Font=MesloLGS NF,12,-1,5,50,0,0,0,0,0
+
+        [General]
+        Name=Meslo
+        Parent=FALLBACK/
+
+        [Scrolling]
+        HistoryMode=2
+      '';
+
+      ".config/konsolerc".text = ''
+        [Desktop Entry]
+        DefaultProfile=Meslo.profile
+      '';
+
+      ".config/yakuakerc".text = ''
+        [Appearance]
+        Font=MesloLGS NF,12,-1,5,50,0,0,0,0,0
+
+        [General]
+        DefaultProfile=Meslo.profile
       '';
     };
 

@@ -9,6 +9,7 @@
     isNormalUser = true;
     description = "arexito";
     extraGroups = [ "networkmanager" "wheel" "i2c" "input" "kvm" ];
+    shell = pkgs.zsh;
   };
 
   # Run commands as root w/o password.
@@ -27,6 +28,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = ".bak";
     users = {
       "rx" = import ./home-manager.nix;
     };

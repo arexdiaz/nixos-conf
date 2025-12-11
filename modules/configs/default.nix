@@ -18,6 +18,7 @@ in
     ./pkgs-media.nix
     ./pkgs-tools.nix
     ./shell/fish-shell.nix
+    ./shell/zsh-shell.nix
     ./system.nix
     ./services.nix
     ./virtualization/docker.nix

@@ -72,6 +72,10 @@
         fish = {
           enable = lib.mkEnableOption "Whether to enable fish shell.";
         };
+        zsh = {
+          enable = lib.mkEnableOption "Whether to enable zsh shell.";
+          ohMyZsh.enable = lib.mkEnableOption "Enable oh-my-zsh along with the bundled Powerlevel10k configuration.";
+        };
       };
       virtualization = {
         enable = lib.mkEnableOption "Whether to enable virtualization packages.";
