@@ -17,7 +17,6 @@
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
-
   preconfs = {
     pkgs = {
       core.enable = true;
@@ -44,11 +43,12 @@
     system = {
       desktop.environment = {
         kde.enable = true;
+        xserver.enable = true;
       };
       kernel = {
         zen = {
           enable = true;
-          patch.rdtsc.enable = true;
+          patch.rdtsc.enable = false;
         };
         scx.enable = true;
         iommu = {
@@ -85,7 +85,8 @@
   };
 
   programs.nix-ld.enable = true;
-
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
   powerManagement.cpuFreqGovernor = "performance";
 
   fileSystems = {

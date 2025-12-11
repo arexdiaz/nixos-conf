@@ -27,6 +27,7 @@
   ];
 
   home-manager = {
+    backupFileExtension = "hm-bak";
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = ".bak";
     users = {
