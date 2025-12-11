@@ -1,11 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
 
-let
-  # Path to pcsx2wrap is relative to this file's location.
-  # From /etc/nixos/modules/packages/desktop/emulators/default.nix
-  # to /etc/nixos/modules/packages/pcsx2wrap/default.nix
-  pcsx2wrap = pkgs.callPackage ./pcsx2wrap {};
-in
 {
   # Options are defined unconditionally at the module level.
   options.preconfs.pkgs.emulators = {
@@ -29,10 +23,10 @@ in
         wineWowPackages.staging
         winetricks
       ] ++ lib.optionals config.preconfs.pkgs.emulators.gaming.pcsx2.enable [
-        pcsx2wrap
+        pcsx2
       ] ++ lib.optionals config.preconfs.pkgs.emulators.gaming.lutris.enable [
-        gamescope
         lutris
+        gamescope
         mangohud
         mangojuice
       ];
