@@ -55,11 +55,9 @@ lib.mkIf cfg.enable {
         };
 
         interactiveShellInit = ''
-          if [ -r ~/.p10k.zsh ]; then
-            source ~/.p10k.zsh
-          elif [ -r /etc/zsh/p10k.zsh ]; then
-            source /etc/zsh/p10k.zsh
-          fi
+          export POWERLEVEL9K_CONFIG_FILE="$HOME/.p10k.zsh"
+          [ ! -f ~/.p10k.zsh ] && touch ~/.p10k.zsh
+          [ -r ~/.p10k.zsh ] && source ~/.p10k.zsh
         '';
       };
   };

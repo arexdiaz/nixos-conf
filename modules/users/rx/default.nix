@@ -27,7 +27,7 @@
   ];
 
   home-manager = {
-    backupFileExtension = ".bak";
+    backupFileExtension = "bak";
     extraSpecialArgs = { inherit inputs; };
     users = {
       "rx" = import ./home-manager.nix;

@@ -36,7 +36,6 @@
         wine.enable = true;
         gaming = {
           lutris.enable = true;
-          pcsx2.enable = true;
         };
       };
     };
@@ -58,7 +57,8 @@
           vfio.devices="10de:2489,10de:228b,1b21:0612";
         };
       };
-      shell.fish.enable = true;
+      shell.zsh.enable = true;
+      shell.zsh.ohMyZsh.enable = true;
       virtualization = {
         enable = true;
         memprocfs.enable = true;

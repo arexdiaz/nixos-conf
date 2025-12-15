@@ -15,7 +15,7 @@
 
   config = lib.mkIf config.preconfs.system.kernel.scx.enable {
     services.scx = {
-      package = pkgs.scx_git.full;
+      package = pkgs.scx.full;
       scheduler = config.preconfs.system.kernel.scx.scheduler;
       enable = true;
     };

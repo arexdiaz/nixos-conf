@@ -3,8 +3,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "arexdiaz";
-    userEmail = "arexito@icloud.com";
+    settings.user = {
+      name = "arexdiaz";
+      email = "arexito@icloud.com";
+    };
   };
   programs.alacritty = {
     enable = true;
@@ -107,7 +109,7 @@
 
       ".local/share/konsole/Meslo.profile".text = ''
         [Appearance]
-        ColorScheme=Linux
+        ColorScheme=Breeze
         Font=MesloLGS NF,12,-1,5,50,0,0,0,0,0
 
         [General]

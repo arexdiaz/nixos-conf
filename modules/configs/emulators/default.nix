@@ -7,9 +7,6 @@
       enable = lib.mkEnableOption "Whether to install Wine and Winetricks compatibility layer.";
     };
     gaming = {
-      pcsx2 = {
-        enable = lib.mkEnableOption "Whether to install PCSX2 emulator.";
-      };
       lutris = {
         enable = lib.mkEnableOption "Whether to install Lutris and related gaming utilities.";
       };
@@ -22,8 +19,6 @@
       lib.optionals config.preconfs.pkgs.emulators.wine.enable [
         wineWowPackages.staging
         winetricks
-      ] ++ lib.optionals config.preconfs.pkgs.emulators.gaming.pcsx2.enable [
-        pcsx2
       ] ++ lib.optionals config.preconfs.pkgs.emulators.gaming.lutris.enable [
         lutris
         gamescope
